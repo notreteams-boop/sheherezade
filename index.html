@@ -2019,12 +2019,12 @@
       const msg =
 `🔥 Rezervācija — Šeherezāde
 
-👤 ${name}
-📞 ${phone}
-📅 ${dateFormatted}
-⏰ ${time}
-👥 ${guests} pers.
-💬 ${wishes || '—'}
+ ${name}
+ ${phone}
+ ${dateFormatted}
+ ${time}
+ ${guests} pers.
+ ${wishes || '—'}
 
 _šeherezade.lv_`;
       openWhatsApp(msg);
@@ -2041,17 +2041,17 @@ _šeherezade.lv_`;
 
       const total = menuItems.reduce((sum, item) => sum + parseFloat(item.price) * (quantities[item.id] || 0), 0);
       const msg =
-`🥡 Samovyvoza pasūtījums — Šeherezāde
+` Samovyvoza pasūtījums — Šeherezāde
 
-👤 ${name}
-📞 ${phone}
-⏰ Paņemšana: ${time}
+ ${name}
+ ${phone}
+ Paņemšana: ${time}
 
-🍽️ Pasūtījums:
+ Pasūtījums:
 ${lines.join('\n')}
 
-💰 Kopā: ${total.toFixed(2)} €
-💬 ${wishes || '—'}
+ Kopā: ${total.toFixed(2)} €
+ ${wishes || '—'}
 
 _šeherezade.lv_`;
       openWhatsApp(msg);
@@ -2071,18 +2071,18 @@ _šeherezade.lv_`;
 
       const total = menuItems.reduce((sum, item) => sum + parseFloat(item.price) * (quantities[item.id] || 0), 0);
       const msg =
-`🛵 Piegādes pasūtījums — Šeherezāde
+` Piegādes pasūtījums — Šeherezāde
 
-👤 ${name}
-📞 ${phone}
-📍 Rajons: ${zone}
-🏠 Adrese: ${address}
+ ${name}
+ ${phone}
+ Rajons: ${zone}
+ Adrese: ${address}
 
-🍽️ Pasūtījums:
+ Pasūtījums:
 ${lines.join('\n')}
 
-💰 Kopā: ${total.toFixed(2)} € (bezmaksas piegāde)
-💬 ${wishes || '—'}
+ Kopā: ${total.toFixed(2)} € (bezmaksas piegāde)
+ ${wishes || '—'}
 
 _šeherezade.lv_`;
       openWhatsApp(msg);
