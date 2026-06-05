@@ -928,6 +928,110 @@
 
     /* ─── SECTION SPACING HELPER ─── */
     .section-head { text-align: center; margin-bottom: 4rem; }
+
+    /* ─── ORDER TYPE SELECTOR ─── */
+    .order-type-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--cream);
+      border: 2px solid rgba(74,44,26,0.15);
+      border-radius: 8px;
+      padding: 1.1rem 1.8rem;
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--smoke);
+      cursor: pointer;
+      transition: all 0.25s;
+      min-width: 160px;
+    }
+    .order-type-btn .ot-icon { font-size: 1.6rem; }
+    .order-type-btn:hover {
+      border-color: var(--terracotta);
+      color: var(--terracotta);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(192,82,42,0.15);
+    }
+    .order-type-btn.active {
+      background: var(--terracotta);
+      border-color: var(--terracotta);
+      color: #fff;
+      box-shadow: 0 6px 24px rgba(192,82,42,0.3);
+    }
+
+    /* ─── MENU ORDER LIST (for takeaway/delivery) ─── */
+    .menu-order-list {
+      background: var(--sand);
+      border: 1px solid rgba(74,44,26,0.15);
+      border-radius: 4px;
+      max-height: 320px;
+      overflow-y: auto;
+    }
+    .menu-order-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.7rem 1rem;
+      border-bottom: 1px solid rgba(74,44,26,0.08);
+      gap: 0.75rem;
+    }
+    .menu-order-item:last-child { border-bottom: none; }
+    .menu-order-item-name {
+      font-size: 0.85rem;
+      color: var(--coal);
+      flex: 1;
+    }
+    .menu-order-item-price {
+      font-size: 0.8rem;
+      color: var(--terracotta);
+      font-weight: 600;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .qty-control {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      flex-shrink: 0;
+    }
+    .qty-btn {
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      border: 1px solid rgba(74,44,26,0.2);
+      background: var(--cream);
+      color: var(--coal);
+      font-size: 1rem;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s;
+      flex-shrink: 0;
+    }
+    .qty-btn:hover { background: var(--terracotta); border-color: var(--terracotta); color: #fff; }
+    .qty-num {
+      width: 20px;
+      text-align: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--coal);
+    }
+    .wa-btn-info {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      justify-content: center;
+      font-size: 0.72rem;
+      color: var(--smoke);
+      margin-top: 0.75rem;
+      letter-spacing: 0.04em;
+    }
+    .wa-btn-info svg { flex-shrink: 0; }
   </style>
 </head>
 <body>
@@ -945,6 +1049,7 @@
       <button class="lang-btn active" onclick="setLang('lv')">LV</button>
       <button class="lang-btn"        onclick="setLang('ru')">RU</button>
       <button class="lang-btn"        onclick="setLang('en')">EN</button>
+      <button class="lang-btn"        onclick="setLang('az')">AZ</button>
     </div>
     <a href="#reservation" class="nav-cta" data-t="nav_cta">Rezervēt galdiņu</a>
   </div>
@@ -1048,50 +1153,51 @@
     <div id="tab-salati" class="menu-panel active reveal">
       <div class="menu-grid">
         <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_veg_salad">Dārzeņu salāti</p><p class="menu-item-desc" data-t="d_veg_salad_d">Svaigi dārzeņi, garšaugi, olīveļļa</p></div><span class="menu-item-price">3,00 €</span></div>
-        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_greek_salad">Grieķu salāti</p><p class="menu-item-desc" data-t="d_greek_salad_d">Tomāti, gurķi, olīvas, feta siers</p></div><span class="menu-item-price">6,50 €</span></div>
-        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name">„Šeherezāde" salāti <span class="menu-item-badge">HIT</span></p><p class="menu-item-desc" data-t="d_sher_salad_d">Šefpavāra autorrecepts — slepens</p></div><span class="menu-item-price">8,50 €</span></div>
-        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_caesar">Cēzara salāti ar vistu</p><p class="menu-item-desc" data-t="d_caesar_d">Romānu salāti, grutoni, parmezāns</p></div><span class="menu-item-price">8,00 €</span></div>
-        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_kiploki">Ķiploku gredzeni</p><p class="menu-item-desc" data-t="d_kiploki_d">Kraukšķīgi, cepta ķiploku mērcē</p></div><span class="menu-item-price">4,50 €</span></div>
-        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_fries">Kartupeļi Fri</p><p class="menu-item-desc" data-t="d_fries_d">Kraukšķīgi, zelta brūni</p></div><span class="menu-item-price">2,50 €</span></div>
-        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_daivinas">Kartupeļi Daiviņas</p><p class="menu-item-desc" data-t="d_daivinas_d">Maigā krēma mērcē cepta</p></div><span class="menu-item-price">3,00 €</span></div>
-        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_majas_kart">Mājas kartupeļi</p><p class="menu-item-desc" data-t="d_majas_kart_d">Cepti ar rozmarīnu un ķiploku</p></div><span class="menu-item-price">3,50 €</span></div>
-        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_risi">Rīsi</p><p class="menu-item-desc" data-t="d_risi_d">Tvaicēti, ar kurkumu</p></div><span class="menu-item-price">2,00 €</span></div>
-        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_baklazani">Baklažāni ar fetas sieru un riekstiem</p><p class="menu-item-desc" data-t="d_baklazani_d">Cepta baklažāna šķēle, feta, lazdu rieksti</p></div><span class="menu-item-price">7,50 €</span></div>
+        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_greek_salad">Grieķu salāti</p><p class="menu-item-desc" data-t="d_greek_salad_d">Tomāti, gurķi, olīvas, feta siers</p></div><span class="menu-item-price">8,50 €</span></div>
+        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name">„Šeherezāde" salāti <span class="menu-item-badge">HIT</span></p><p class="menu-item-desc" data-t="d_sher_salad_d">Šefpavāra autorrecepts — slepens</p></div><span class="menu-item-price">9,95 €</span></div>
+        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_caesar">Cēzara salāti ar vistu</p><p class="menu-item-desc" data-t="d_caesar_d">Romānu salāti, grutoni, parmezāns</p></div><span class="menu-item-price">9,95 €</span></div>
+        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_kiploki">Ķiploku grauzdiņi</p><p class="menu-item-desc" data-t="d_kiploki_d">Kraukšķīgi, ar ķiploku</p></div><span class="menu-item-price">5,50 €</span></div>
+        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_fries">Kartupeļi Frī</p><p class="menu-item-desc" data-t="d_fries_d">Kraukšķīgi, zelta brūni (200 gr)</p></div><span class="menu-item-price">3,00 €</span></div>
+        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_daivinas">Kartupeļi Daiviņas</p><p class="menu-item-desc" data-t="d_daivinas_d">Maigā krēma mērcē cepta (200 gr)</p></div><span class="menu-item-price">3,50 €</span></div>
+        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_majas_kart">Mājas kartupeļi</p><p class="menu-item-desc" data-t="d_majas_kart_d">Cepti ar rozmarīnu un ķiploku</p></div><span class="menu-item-price">4,95 €</span></div>
+        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_risi">Rīsi</p><p class="menu-item-desc" data-t="d_risi_d">Tvaicēti, ar kurkumu</p></div><span class="menu-item-price">2,50 €</span></div>
+        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_baklazani">Baklažānu rullīši ar fetas sieru un riekstiem</p><p class="menu-item-desc" data-t="d_baklazani_d">Cepta baklažāna šķēle, feta, lazdu rieksti</p></div><span class="menu-item-price">9,50 €</span></div>
+        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_gurki">Marinēti gurķi</p><p class="menu-item-desc" data-t="d_gurki_d">Marinēti mājas recepte</p></div><span class="menu-item-price">0,60 € / gab.</span></div>
       </div>
     </div>
 
     <!-- ŠAŠLIKI -->
     <div id="tab-saszliki" class="menu-panel">
       <div class="menu-grid">
-        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_vistas_gala">Vistas gaļa</p><p class="menu-item-desc" data-t="d_vistas_gala_d">Marinēta, cepta uz dzīvajām oglēm</p></div><span class="menu-item-price">8,00 €</span></div>
-        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_cukgala">Cūkgaļa</p><p class="menu-item-desc" data-t="d_cukgala_d">Sulīga, ar garšvielām</p></div><span class="menu-item-price">8,00 €</span></div>
-        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_cukgala_rib">Cūkgaļas ribiņas</p><p class="menu-item-desc" data-t="d_cukgala_rib_d">Ilgi marinētas ribiņas uz oglēm</p></div><span class="menu-item-price">10,00 €</span></div>
-        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_jera_kebabs">Jēra juļa kebabs</p><p class="menu-item-desc" data-t="d_jera_kebabs_d">Maltā jēra gaļa ar garšaugiem</p></div><span class="menu-item-price">12,00 €</span></div>
-        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_jera_rib">Jēra ribiņas</p><p class="menu-item-desc" data-t="d_jera_rib_d">Kaukāza tradīciju recepte</p></div><span class="menu-item-price">14,50 €</span></div>
+        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_vistas_gala">Vistas šašliks</p><p class="menu-item-desc" data-t="d_vistas_gala_d">Marinēta, cepta uz dzīvajām oglēm</p></div><span class="menu-item-price">10,00 €</span></div>
+        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_cukgala">Cūkgaļas šašliks</p><p class="menu-item-desc" data-t="d_cukgala_d">Sulīga, ar garšvielām</p></div><span class="menu-item-price">10,00 €</span></div>
+        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_cukgala_rib">Cūkgaļas ribiņas</p><p class="menu-item-desc" data-t="d_cukgala_rib_d">Ilgi marinētas ribiņas uz oglēm</p></div><span class="menu-item-price">12,00 €</span></div>
+        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_jera_kebabs">Jēra lula kebabs</p><p class="menu-item-desc" data-t="d_jera_kebabs_d">Maltā jēra gaļa ar garšaugiem</p></div><span class="menu-item-price">13,50 €</span></div>
+        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_jera_rib">Jēra ribiņas</p><p class="menu-item-desc" data-t="d_jera_rib_d">Kaukāza tradīciju recepte</p></div><span class="menu-item-price">15,50 €</span></div>
         <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_jera_karb">Jēra karbonāde</p><p class="menu-item-desc" data-t="d_jera_karb_d">Premium griezums, maiga struktūra</p></div><span class="menu-item-price">20,00 €</span></div>
-        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_stores">Stores šašliks <span class="menu-item-badge">HIT</span></p><p class="menu-item-desc" data-t="d_stores_d">Svaigas stores filejas, marinētas ar citrusu</p></div><span class="menu-item-price">18,50 €</span></div>
-        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_lasis">Grilēts lasis</p><p class="menu-item-desc" data-t="d_lasis_d">Atlases lasis uz koka dēlīša</p></div><span class="menu-item-price">14,50 €</span></div>
-        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_darzeni_ogles">Cepti dārzeņi uz oglēm</p><p class="menu-item-desc" data-t="d_darzeni_ogles_d">Sezonāli dārzeņi ar bazsiliķu</p></div><span class="menu-item-price">9,00 €</span></div>
+        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_lasis">Grilēts lasis <span class="menu-item-badge">HIT</span></p><p class="menu-item-desc" data-t="d_lasis_d">Atlases lasis uz oglēm</p></div><span class="menu-item-price">14,50 €</span></div>
+        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_darzeni_ogles">Cepti dārzeņi uz oglēm</p><p class="menu-item-desc" data-t="d_darzeni_ogles_d">Sezonāli dārzeņi ar bazsiliķu (300 gr)</p></div><span class="menu-item-price">10,00 €</span></div>
       </div>
     </div>
 
     <!-- PAMATĒDIENI -->
     <div id="tab-pamat" class="menu-panel">
       <div class="menu-grid">
-        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_auksta_zupa">Aukstā zupa</p><p class="menu-item-desc" data-t="d_auksta_zupa_d">Vēsa vasaras zupa ar dārzeņiem</p></div><span class="menu-item-price">5,50 €</span></div>
-        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_harcho">Harčo</p><p class="menu-item-desc" data-t="d_harcho_d">Tradicionālā gruzīnu zupa ar rīsiem</p></div><span class="menu-item-price">7,00 €</span></div>
-        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_frikadelu">Frikadeļu zupa</p><p class="menu-item-desc" data-t="d_frikadelu_d">Mājas frikadeļu zupa, silta un mājīga</p></div><span class="menu-item-price">6,00 €</span></div>
-        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_turku_kebabs">Turku kebabs</p><p class="menu-item-desc" data-t="d_turku_kebabs_d">Lavašā satīts kebabs ar mērci</p></div><span class="menu-item-price">6,00 €</span></div>
-        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name">Uzbeku plovs <span class="menu-item-badge">HIT</span></p><p class="menu-item-desc" data-t="d_plovs_d">Tradicionāls plovs ar jēra gaļu un zafirānu</p></div><span class="menu-item-price">10,00 €</span></div>
-        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_dolma">Dolma</p><p class="menu-item-desc" data-t="d_dolma_d">Vīnogu lapās tītas maltās gaļas ruļļi</p></div><span class="menu-item-price">10,00 €</span></div>
-        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name">Hinkali <span class="menu-item-badge">HIT</span></p><p class="menu-item-desc" data-t="d_hinkali_d">Roku darba knedeļi ar sulīgu pildījumu</p></div><span class="menu-item-price">11,00 €</span></div>
+        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_harcho">Harčo</p><p class="menu-item-desc" data-t="d_harcho_d">Tradicionālā gruzīnu zupa ar rīsiem</p></div><span class="menu-item-price">12,00 €</span></div>
+        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_frikadelu">Frikadeļu zupa</p><p class="menu-item-desc" data-t="d_frikadelu_d">Mājas frikadeļu zupa — ½ porcija 5,00 €</p></div><span class="menu-item-price">9,00 €</span></div>
+        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_turku_kebabs">Turku kebabs</p><p class="menu-item-desc" data-t="d_turku_kebabs_d">Lavašā satīts kebabs ar mērci</p></div><span class="menu-item-price">9,95 €</span></div>
+        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name">Uzbeku plovs <span class="menu-item-badge">HIT</span></p><p class="menu-item-desc" data-t="d_plovs_d">Tradicionāls plovs ar jēra gaļu un zafirānu</p></div><span class="menu-item-price">12,00 €</span></div>
+        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_dolma">Dolma</p><p class="menu-item-desc" data-t="d_dolma_d">Vīnogu lapās tītas maltās gaļas ruļļi</p></div><span class="menu-item-price">12,00 €</span></div>
+        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name">Hinkaļi (Azerbaidžāņu gurza) <span class="menu-item-badge">HIT</span></p><p class="menu-item-desc" data-t="d_hinkali_d">Roku darba knedeļi ar sulīgu pildījumu — lielā porcija 15,00 €</p></div><span class="menu-item-price">12,00 €</span></div>
+        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_gutabs_zal">Gutabs ar zaļumiem</p><p class="menu-item-desc" data-t="d_gutabs_zal_d">Tradicionāls Azerbaidžānas ēdiens</p></div><span class="menu-item-price">9,00 €</span></div>
+        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_gutabs_gala">Gutabs ar gaļu</p><p class="menu-item-desc" data-t="d_gutabs_gala_d">Tradicionāls Azerbaidžānas ēdiens</p></div><span class="menu-item-price">9,00 €</span></div>
       </div>
     </div>
 
     <!-- MAIZE -->
     <div id="tab-maize" class="menu-panel">
       <div class="menu-grid">
-        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_chureks">Čureks</p><p class="menu-item-desc" data-t="d_chureks_d">Tradicionālā Vidusāzijas maize, cepta dienā</p></div><span class="menu-item-price">0,60 / 2,40 €</span></div>
+        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_chureks">Čureks</p><p class="menu-item-desc" data-t="d_chureks_d">Tradicionālā Vidusāzijas maize, cepta dienā</p></div><span class="menu-item-price">0,70 / 2,80 €</span></div>
         <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_lavasz">Lavašs</p><p class="menu-item-desc" data-t="d_lavasz_d">Plāna Armēnijas tipa maize, karsta no tanūra</p></div><span class="menu-item-price">0,60 / 2,50 €</span></div>
       </div>
     </div>
@@ -1099,10 +1205,10 @@
     <!-- MĒRCES -->
     <div id="tab-merces" class="menu-panel">
       <div class="menu-grid">
-        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_adzhika">Adžika</p><p class="menu-item-desc" data-t="d_adzhika_d">Pikantā Kaukāza garšvielu pasta</p></div><span class="menu-item-price">1,20 €</span></div>
-        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_ketchup">Kečups</p><p class="menu-item-desc" data-t="d_ketchup_d">Klasiskais tomātu kečups</p></div><span class="menu-item-price">1,00 €</span></div>
-        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_majoneze">Majonēze ar ķiplokiem</p><p class="menu-item-desc" data-t="d_majoneze_d">Mājas majonēze ar svaigiem ķiplokiem</p></div><span class="menu-item-price">1,00 €</span></div>
-        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_krejums">Krējums</p><p class="menu-item-desc" data-t="d_krejums_d">Dabīgais skābais krējums</p></div><span class="menu-item-price">1,00 €</span></div>
+        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_adzhika">Adžika</p><p class="menu-item-desc" data-t="d_adzhika_d">Pikantā Kaukāza garšvielu pasta</p></div><span class="menu-item-price">1,70 €</span></div>
+        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_ketchup">Kečups</p><p class="menu-item-desc" data-t="d_ketchup_d">Klasiskais tomātu kečups</p></div><span class="menu-item-price">1,50 €</span></div>
+        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_majoneze">Majonēze ar ķiplokiem</p><p class="menu-item-desc" data-t="d_majoneze_d">Mājas majonēze ar svaigiem ķiplokiem</p></div><span class="menu-item-price">1,70 €</span></div>
+        <div class="menu-item"><div class="menu-item-info"><p class="menu-item-name" data-t="d_krejums">Krējums</p><p class="menu-item-desc" data-t="d_krejums_d">Dabīgais skābais krējums</p></div><span class="menu-item-price">1,70 €</span></div>
       </div>
     </div>
   </div>
@@ -1163,31 +1269,49 @@
 <!-- ═══════════════ RESERVATION ═══════════════ -->
 <section id="reservation">
   <div class="container">
-    <div class="reservation-inner">
+    <div class="reservation-inner" style="max-width:760px;">
       <div class="reservation-header reveal">
         <em class="section-label" data-t="res_label">Rezervācija</em>
-        <h2 class="reservation-title" data-t="res_title">Rezervējiet galdiņu</h2>
-        <p class="reservation-subtitle" data-t="res_sub">Atstājiet pieteikumu — un mēs sagatavosim labāko galdiņu jūsu vizītei.</p>
+        <h2 class="reservation-title" data-t="res_title">Rezervēt / Pasūtīt</h2>
+        <p class="reservation-subtitle" data-t="res_sub">Izvēlieties veidu — un nosūtiet pieteikumu uz WhatsApp.</p>
       </div>
-      <div class="form-card reveal">
+
+      <!-- TYPE SELECTOR -->
+      <div class="order-type-selector reveal" style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:2rem;">
+        <button class="order-type-btn active" onclick="setOrderType('reservation')" id="ot-reservation">
+          <span class="ot-icon">🍽️</span>
+          <span data-t="ot_reservation">Galdiņa rezervācija</span>
+        </button>
+        <button class="order-type-btn" onclick="setOrderType('takeaway')" id="ot-takeaway">
+          <span class="ot-icon">🥡</span>
+          <span data-t="ot_takeaway">Paņemšana uz vietas</span>
+        </button>
+        <button class="order-type-btn" onclick="setOrderType('delivery')" id="ot-delivery">
+          <span class="ot-icon">🛵</span>
+          <span data-t="ot_delivery">Piegāde</span>
+        </button>
+      </div>
+
+      <!-- ── RESERVATION FORM ── -->
+      <div class="form-card reveal" id="form-reservation">
         <div class="form-row">
           <div class="form-group">
             <label class="form-label" data-t="f_name">Jūsu vārds</label>
-            <input type="text" id="f-name" class="form-input" placeholder="Anna" autocomplete="name" />
+            <input type="text" id="r-name" class="form-input" placeholder="Anna" autocomplete="name" />
           </div>
           <div class="form-group">
             <label class="form-label" data-t="f_phone">Tālrunis</label>
-            <input type="tel" id="f-phone" class="form-input" placeholder="+371 ..." autocomplete="tel" />
+            <input type="tel" id="r-phone" class="form-input" placeholder="+371 ..." autocomplete="tel" />
           </div>
         </div>
         <div class="form-row">
           <div class="form-group">
             <label class="form-label" data-t="f_date">Datums</label>
-            <input type="date" id="f-date" class="form-input" />
+            <input type="date" id="r-date" class="form-input" />
           </div>
           <div class="form-group">
             <label class="form-label" data-t="f_time">Laiks</label>
-            <select id="f-time" class="form-select">
+            <select id="r-time" class="form-select">
               <option value="" data-t="f_time_ph">Izvēlieties laiku</option>
               <option>11:00</option><option>11:30</option>
               <option>12:00</option><option>12:30</option>
@@ -1203,7 +1327,7 @@
         </div>
         <div class="form-group">
           <label class="form-label" data-t="f_guests">Viesu skaits</label>
-          <select id="f-guests" class="form-select">
+          <select id="r-guests" class="form-select">
             <option>1</option><option selected>2</option>
             <option>3</option><option>4</option>
             <option>5</option><option>6</option>
@@ -1212,10 +1336,92 @@
         </div>
         <div class="form-group">
           <label class="form-label" data-t="f_wishes">Vēlmes <span style="opacity:0.5;font-weight:400;" data-t="f_optional">(neobligāti)</span></label>
-          <textarea id="f-wishes" class="form-textarea" placeholder="" data-t-ph="f_wishes_ph"></textarea>
+          <textarea id="r-wishes" class="form-textarea" placeholder="" data-t-ph="f_wishes_ph"></textarea>
         </div>
-        <button class="form-submit" id="submitBtn" onclick="submitForm()" data-t="f_submit">Nosūtīt pieteikumu</button>
+        <button class="form-submit" onclick="submitWhatsApp('reservation')" data-t="f_submit">Nosūtīt uz WhatsApp</button>
       </div>
+
+      <!-- ── TAKEAWAY FORM ── -->
+      <div class="form-card reveal" id="form-takeaway" style="display:none;">
+        <p style="font-size:0.82rem;color:var(--smoke);margin-bottom:1.5rem;line-height:1.6;" data-t="takeaway_info">Izvēlieties ēdienus no ēdienkartes un norādiet paņemšanas laiku. Mēs sagatavosim pasūtījumu.</p>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" data-t="f_name">Jūsu vārds</label>
+            <input type="text" id="t-name" class="form-input" placeholder="Anna" autocomplete="name" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" data-t="f_phone">Tālrunis</label>
+            <input type="tel" id="t-phone" class="form-input" placeholder="+371 ..." autocomplete="tel" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-t="f_time_pickup">Paņemšanas laiks</label>
+          <select id="t-time" class="form-select">
+            <option value="" data-t="f_time_ph">Izvēlieties laiku</option>
+            <option>11:00</option><option>11:30</option>
+            <option>12:00</option><option>12:30</option>
+            <option>13:00</option><option>13:30</option>
+            <option>14:00</option><option>14:30</option>
+            <option>15:00</option><option>15:30</option>
+            <option>16:00</option><option>16:30</option>
+            <option>17:00</option><option>17:30</option>
+            <option>18:00</option><option>18:30</option>
+            <option>19:00</option><option>19:30</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-t="f_order">Pasūtījums</label>
+          <div class="menu-order-list" id="t-menu-list"></div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-t="f_wishes">Papildu vēlmes <span style="opacity:0.5;font-weight:400;" data-t="f_optional">(neobligāti)</span></label>
+          <textarea id="t-wishes" class="form-textarea" style="min-height:70px;" placeholder="" data-t-ph="f_wishes_ph"></textarea>
+        </div>
+        <button class="form-submit" onclick="submitWhatsApp('takeaway')" data-t="f_submit_takeaway">Nosūtīt uz WhatsApp</button>
+      </div>
+
+      <!-- ── DELIVERY FORM ── -->
+      <div class="form-card reveal" id="form-delivery" style="display:none;">
+        <div class="delivery-zones-info" style="background:rgba(192,82,42,0.08);border:1px solid rgba(192,82,42,0.2);border-radius:4px;padding:1rem 1.25rem;margin-bottom:1.5rem;">
+          <p style="font-size:0.78rem;font-weight:700;color:var(--terracotta);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.4rem;" data-t="delivery_zones_title">Bezmaksas piegādes zonas</p>
+          <p style="font-size:0.82rem;color:var(--smoke);line-height:1.6;" data-t="delivery_zones_list">🟢 Centrs · Pārdaugava · Plāvnieki · Kengarags</p>
+          <p style="font-size:0.75rem;color:var(--smoke);margin-top:0.3rem;opacity:0.7;" data-t="delivery_zones_note">Citas zonas piegāde nav pieejama</p>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" data-t="f_name">Jūsu vārds</label>
+            <input type="text" id="d-name" class="form-input" placeholder="Anna" autocomplete="name" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" data-t="f_phone">Tālrunis</label>
+            <input type="tel" id="d-phone" class="form-input" placeholder="+371 ..." autocomplete="tel" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-t="f_zone">Piegādes zona</label>
+          <select id="d-zone" class="form-select">
+            <option value="" data-t="f_zone_ph">Izvēlieties rajonu</option>
+            <option value="Centrs">Centrs</option>
+            <option value="Pārdaugava">Pārdaugava</option>
+            <option value="Plāvnieki">Plāvnieki</option>
+            <option value="Kengarags">Kengarags</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-t="f_address">Adrese</label>
+          <input type="text" id="d-address" class="form-input" placeholder="Iela, māja, dzīvoklis" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-t="f_order">Pasūtījums</label>
+          <div class="menu-order-list" id="d-menu-list"></div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-t="f_wishes">Papildu vēlmes <span style="opacity:0.5;font-weight:400;" data-t="f_optional">(neobligāti)</span></label>
+          <textarea id="d-wishes" class="form-textarea" style="min-height:70px;" placeholder="" data-t-ph="f_wishes_ph"></textarea>
+        </div>
+        <button class="form-submit" onclick="submitWhatsApp('delivery')" data-t="f_submit_delivery">Nosūtīt uz WhatsApp</button>
+      </div>
+
     </div>
   </div>
 </section>
@@ -1292,6 +1498,52 @@
 
 <!-- ═══════════════ SCRIPTS ═══════════════ -->
 <script>
+  // ─── MENU DATA FOR ORDER FORMS ───────────────────────────────────
+  const menuItems = [
+    // Salāti & Piedevas
+    { id: 's1', name_lv:'Dārzeņu salāti', name_ru:'Овощной салат', name_en:'Vegetable salad', name_az:'Tərəvəz salatı', price:'3.00' },
+    { id: 's2', name_lv:'Grieķu salāti', name_ru:'Греческий салат', name_en:'Greek salad', name_az:'Yunan salatı', price:'8.50' },
+    { id: 's3', name_lv:'"Šeherezāde" salāti', name_ru:'Салат "Шехерезада"', name_en:'"Sheherazade" salad', name_az:'"Şəhərazad" salatı', price:'9.95' },
+    { id: 's4', name_lv:'Cēzara salāti ar vistu', name_ru:'Салат Цезарь с курицей', name_en:'Caesar salad with chicken', name_az:'Toyuqlu Sezar salatı', price:'9.95' },
+    { id: 's5', name_lv:'Ķiploku grauzdiņi', name_ru:'Чесночные гренки', name_en:'Garlic croutons', name_az:'Sarımsaq krutonları', price:'5.50' },
+    { id: 's6', name_lv:'Kartupeļi Frī (200g)', name_ru:'Картошка Фри (200г)', name_en:'French fries (200g)', name_az:'Qızarmış kartof (200q)', price:'3.00' },
+    { id: 's7', name_lv:'Kartupeļi Daiviņas (200g)', name_ru:'Картошка Дольки (200г)', name_en:'Potato wedges (200g)', name_az:'Kartof dilimləri (200q)', price:'3.50' },
+    { id: 's8', name_lv:'Mājas kartupeļi', name_ru:'Домашняя картошка', name_en:'Home-style potatoes', name_az:'Ev üslubu kartof', price:'4.95' },
+    { id: 's9', name_lv:'Rīsi', name_ru:'Рис', name_en:'Rice', name_az:'Düyü', price:'2.50' },
+    { id: 's10', name_lv:'Baklažānu rullīši ar fetu', name_ru:'Рулетики из баклажан с фетой', name_en:'Eggplant rolls with feta', name_az:'Fetali badımcan ruleti', price:'9.50' },
+    { id: 's11', name_lv:'Marinēti gurķi (1 gab.)', name_ru:'Маринованный огурец (шт.)', name_en:'Pickled cucumber (pc.)', name_az:'Turşu xiyar (ədəd)', price:'0.60' },
+    // Šašliki
+    { id: 'sh1', name_lv:'Vistas šašliks', name_ru:'Шашлык из курицы', name_en:'Chicken shashlik', name_az:'Toyuq kebabı', price:'10.00' },
+    { id: 'sh2', name_lv:'Cūkgaļas šašliks', name_ru:'Шашлык из свинины', name_en:'Pork shashlik', name_az:'Donuz əti kebabı', price:'10.00' },
+    { id: 'sh3', name_lv:'Cūkgaļas ribiņas', name_ru:'Свиные рёбрышки', name_en:'Pork ribs', name_az:'Donuz qabırğası', price:'12.00' },
+    { id: 'sh4', name_lv:'Jēra lula kebabs', name_ru:'Люля-кебаб из баранины', name_en:'Lamb lula kebab', name_az:'Quzu lülə kebabı', price:'13.50' },
+    { id: 'sh5', name_lv:'Jēra ribiņas', name_ru:'Бараньи рёбрышки', name_en:'Lamb ribs', name_az:'Quzu qabırğası', price:'15.50' },
+    { id: 'sh6', name_lv:'Jēra karbonāde', name_ru:'Баранья корейка', name_en:'Lamb chop', name_az:'Quzu kotleti', price:'20.00' },
+    { id: 'sh7', name_lv:'Grilēts lasis', name_ru:'Гриль лосось', name_en:'Grilled salmon', name_az:'Qril qızılbalıq', price:'14.50' },
+    { id: 'sh8', name_lv:'Cepti dārzeņi uz oglēm (300g)', name_ru:'Овощи на углях (300г)', name_en:'Charcoal-grilled vegetables (300g)', name_az:'Közde qızardılmış tərəvəz (300q)', price:'10.00' },
+    // Pamatēdieni & zupas
+    { id: 'p1', name_lv:'Harčo', name_ru:'Харчо', name_en:'Kharcho', name_az:'Xarço', price:'12.00' },
+    { id: 'p2', name_lv:'Frikadeļu zupa', name_ru:'Суп с фрикадельками', name_en:'Meatball soup', name_az:'Köftə şorbası', price:'9.00' },
+    { id: 'p3', name_lv:'Turku kebabs', name_ru:'Турецкий кебаб', name_en:'Turkish kebab', name_az:'Türk kebabı', price:'9.95' },
+    { id: 'p4', name_lv:'Uzbeku plovs', name_ru:'Узбекский плов', name_en:'Uzbek plov', name_az:'Özbək plovu', price:'12.00' },
+    { id: 'p5', name_lv:'Dolma', name_ru:'Долма', name_en:'Dolma', name_az:'Dolma', price:'12.00' },
+    { id: 'p6', name_lv:'Hinkaļi (Azerbaidžāņu gurza)', name_ru:'Хинкали (Азербайджанская гюрза)', name_en:'Khinkali (Azerbaijani gurza)', name_az:'Xinkali (Azərbaycan gürzəsi)', price:'12.00' },
+    { id: 'p7', name_lv:'Gutabs ar zaļumiem', name_ru:'Гутаб с зеленью', name_en:'Gutab with greens', name_az:'Göyərtili qutab', price:'9.00' },
+    { id: 'p8', name_lv:'Gutabs ar gaļu', name_ru:'Гутаб с мясом', name_en:'Gutab with meat', name_az:'Ətli qutab', price:'9.00' },
+    // Maize
+    { id: 'm1', name_lv:'Čureks (1 gab.)', name_ru:'Чурек (шт.)', name_en:'Churek (pc.)', name_az:'Çörək (ədəd)', price:'0.70' },
+    { id: 'm2', name_lv:'Lavašs (1 gab.)', name_ru:'Лаваш (шт.)', name_en:'Lavash (pc.)', name_az:'Lavaş (ədəd)', price:'0.60' },
+    // Mērces
+    { id: 'mc1', name_lv:'Adžika', name_ru:'Аджика', name_en:'Adjika', name_az:'Adjika', price:'1.70' },
+    { id: 'mc2', name_lv:'Kečups', name_ru:'Кетчуп', name_en:'Ketchup', name_az:'Ketchup', price:'1.50' },
+    { id: 'mc3', name_lv:'Majonēze ar ķiplokiem', name_ru:'Майонез с чесноком', name_en:'Garlic mayo', name_az:'Sarımsaqlı mayonez', price:'1.70' },
+    { id: 'mc4', name_lv:'Krējums', name_ru:'Сметана', name_en:'Sour cream', name_az:'Qaymaq', price:'1.70' },
+  ];
+
+  // quantities for takeaway and delivery
+  const quantities = {};
+  menuItems.forEach(i => { quantities[i.id] = 0; });
+
   // ─── TRANSLATIONS ───────────────────────────────────────────────
   const translations = {
     lv: {
@@ -1316,28 +1568,29 @@
       d_greek_salad: "Grieķu salāti", d_greek_salad_d: "Tomāti, gurķi, olīvas, feta siers",
       d_sher_salad_d: "Šefpavāra autorrecepts — slepens",
       d_caesar: "Cēzara salāti ar vistu", d_caesar_d: "Romānu salāti, grutoni, parmezāns",
-      d_kiploki: "Ķiploku gredzeni", d_kiploki_d: "Kraukšķīgi, cepta ķiploku mērcē",
-      d_fries: "Kartupeļi Fri", d_fries_d: "Kraukšķīgi, zelta brūni",
-      d_daivinas: "Kartupeļi Daiviņas", d_daivinas_d: "Maigā krēma mērcē cepta",
+      d_kiploki: "Ķiploku grauzdiņi", d_kiploki_d: "Kraukšķīgi, ar ķiploku",
+      d_fries: "Kartupeļi Frī", d_fries_d: "Kraukšķīgi, zelta brūni (200 gr)",
+      d_daivinas: "Kartupeļi Daiviņas", d_daivinas_d: "Cepta ķīļos (200 gr)",
       d_majas_kart: "Mājas kartupeļi", d_majas_kart_d: "Cepti ar rozmarīnu un ķiploku",
       d_risi: "Rīsi", d_risi_d: "Tvaicēti, ar kurkumu",
-      d_baklazani: "Baklažāni ar fetas sieru un riekstiem", d_baklazani_d: "Cepta baklažāna šķēle, feta, lazdu rieksti",
-      d_vistas_gala: "Vistas gaļa", d_vistas_gala_d: "Marinēta, cepta uz dzīvajām oglēm",
-      d_cukgala: "Cūkgaļa", d_cukgala_d: "Sulīga, ar garšvielām",
+      d_baklazani: "Baklažānu rullīši ar fetu", d_baklazani_d: "Cepta baklažāna šķēle, feta, lazdu rieksti",
+      d_gurki: "Marinēti gurķi", d_gurki_d: "Marinēti mājas recepte",
+      d_vistas_gala: "Vistas šašliks", d_vistas_gala_d: "Marinēta, cepta uz dzīvajām oglēm",
+      d_cukgala: "Cūkgaļas šašliks", d_cukgala_d: "Sulīga, ar garšvielām",
       d_cukgala_rib: "Cūkgaļas ribiņas", d_cukgala_rib_d: "Ilgi marinētas ribiņas uz oglēm",
-      d_jera_kebabs: "Jēra juļa kebabs", d_jera_kebabs_d: "Maltā jēra gaļa ar garšaugiem",
+      d_jera_kebabs: "Jēra lula kebabs", d_jera_kebabs_d: "Maltā jēra gaļa ar garšaugiem",
       d_jera_rib: "Jēra ribiņas", d_jera_rib_d: "Kaukāza tradīciju recepte",
       d_jera_karb: "Jēra karbonāde", d_jera_karb_d: "Premium griezums, maiga struktūra",
-      d_stores: "Stores šašliks", d_stores_d: "Svaigas stores filejas, marinētas ar citrusu",
-      d_lasis: "Grilēts lasis", d_lasis_d: "Atlases lasis uz koka dēlīša",
-      d_darzeni_ogles: "Cepti dārzeņi uz oglēm", d_darzeni_ogles_d: "Sezonāli dārzeņi ar bazsiliķu",
-      d_auksta_zupa: "Aukstā zupa", d_auksta_zupa_d: "Vēsa vasaras zupa ar dārzeņiem",
+      d_lasis: "Grilēts lasis", d_lasis_d: "Atlases lasis uz oglēm",
+      d_darzeni_ogles: "Cepti dārzeņi uz oglēm", d_darzeni_ogles_d: "Sezonāli dārzeņi ar bazsiliķu (300 gr)",
       d_harcho: "Harčo", d_harcho_d: "Tradicionālā gruzīnu zupa ar rīsiem",
-      d_frikadelu: "Frikadeļu zupa", d_frikadelu_d: "Mājas frikadeļu zupa, silta un mājīga",
+      d_frikadelu: "Frikadeļu zupa", d_frikadelu_d: "Mājas frikadeļu zupa — ½ porcija 5,00 €",
       d_turku_kebabs: "Turku kebabs", d_turku_kebabs_d: "Lavašā satīts kebabs ar mērci",
       d_plovs_d: "Tradicionāls plovs ar jēra gaļu un zafirānu",
       d_dolma: "Dolma", d_dolma_d: "Vīnogu lapās tītas maltās gaļas ruļļi",
-      d_hinkali_d: "Roku darba knedeļi ar sulīgu pildījumu",
+      d_hinkali_d: "Roku darba knedeļi ar sulīgu pildījumu — lielā porcija 15,00 €",
+      d_gutabs_zal: "Gutabs ar zaļumiem", d_gutabs_zal_d: "Tradicionāls Azerbaidžānas ēdiens",
+      d_gutabs_gala: "Gutabs ar gaļu", d_gutabs_gala_d: "Tradicionāls Azerbaidžānas ēdiens",
       d_chureks: "Čureks", d_chureks_d: "Tradicionālā Vidusāzijas maize, cepta dienā",
       d_lavasz: "Lavašs", d_lavasz_d: "Plāna Armēnijas tipa maize, karsta no tanūra",
       d_adzhika: "Adžika", d_adzhika_d: "Pikantā Kaukāza garšvielu pasta",
@@ -1349,21 +1602,36 @@
       rev1_text: "Brīnišķīgi šašliki un plovs! Ēšana šajā kafejnīcā ir kā ceļojums uz Kaukāzu — aromāti, garšas un siltā atmosfēra. Noteikti atgriezīsimies ar ģimeni!",
       rev2_text: "Hinkali ir vienkārši nepārliecināms — sulīgi, roku darbs, tieši kā Tbilisi! Personāls ļoti draudzīgs un laipns. Vieta mazliet netipiska Rīgai, bet tas ir tieši tās šarms.",
       rev3_text: "Gāju šeit pirmo reizi ar kolēģiem — visi bija sajūsmā. Lasis uz oglēm bija ideāls. Cenas godīgas, porcijas lielas. Šī vieta ir slepens dārgakmens Maskavas forštates rajonā!",
-      res_label: "Rezervācija", res_title: "Rezervējiet galdiņu",
-      res_sub: "Atstājiet pieteikumu — un mēs sagatavosim labāko galdiņu jūsu vizītei.",
+      res_label: "Rezervācija", res_title: "Rezervēt / Pasūtīt",
+      res_sub: "Izvēlieties veidu — un nosūtiet pieteikumu uz WhatsApp.",
+      ot_reservation: "Galdiņa rezervācija", ot_takeaway: "Paņemšana uz vietas", ot_delivery: "Piegāde",
       f_name: "Jūsu vārds", f_phone: "Tālrunis", f_date: "Datums", f_time: "Laiks",
+      f_time_pickup: "Paņemšanas laiks",
       f_time_ph: "Izvēlieties laiku", f_guests: "Viesu skaits",
       f_wishes: "Vēlmes", f_optional: "(neobligāti)",
       f_wishes_ph: "Bērnu krēsls, alerģijas, jubileja...",
-      f_submit: "Nosūtīt pieteikumu",
+      f_order: "Pasūtījums — izvēlieties ēdienus",
+      f_zone: "Piegādes zona", f_zone_ph: "Izvēlieties rajonu",
+      f_address: "Adrese",
+      f_submit: "Nosūtīt uz WhatsApp",
+      f_submit_takeaway: "Nosūtīt uz WhatsApp",
+      f_submit_delivery: "Nosūtīt uz WhatsApp",
+      takeaway_info: "Izvēlieties ēdienus no ēdienkartes un norādiet paņemšanas laiku. Mēs sagatavosim pasūtījumu.",
+      delivery_zones_title: "Bezmaksas piegādes zonas",
+      delivery_zones_list: "🟢 Centrs · Pārdaugava · Plāvnieki · Kengarags",
+      delivery_zones_note: "Citas zonas piegāde nav pieejama",
       cont_title: "Kā mūs atrast",
       cont_addr_label: "Adrese", cont_hours_label: "Darba laiks", cont_phone_label: "Tālrunis",
       day_tue_sat: "Otr – Sest", day_sun: "Svētdiena", day_mon: "Pirmdiena", closed: "Slēgts",
       map_open: "Atvērt kartē",
       footer_copy: "© 2026 Šeherezāde. Visas tiesības aizsargātas.",
       footer_tag: "Kaukāza un austrumu virtuve Rīgā",
-      toast_title: "Paldies!", toast_body: "Jūsu pieteikums ir saņemts. Mēs sazināsimies ar jums tuvākajā laikā, lai apstiprinātu rezervāciju. Gaidām jūs Šeherezādē!", toast_close: "Lieliski!",
-      sending: "Sūtam..."
+      toast_title: "Uz WhatsApp!", toast_body: "Jūs tiksiet pāradresēts uz WhatsApp. Nospiediet 'Sūtīt' — un mēs sazināsimies ar jums ātri!", toast_close: "Sapratu!",
+      err_fields: "Lūdzu, aizpildiet obligātos laukus.",
+      err_phone: "Lūdzu, ievadiet derīgu tālruņa numuru.\nPiemēram: +371 26000000",
+      err_order: "Lūdzu, izvēlieties vismaz vienu ēdienu.",
+      err_zone: "Lūdzu, izvēlieties piegādes zonu.",
+      err_address: "Lūdzu, ievadiet piegādes adresi.",
     },
     ru: {
       nav_menu: "Меню", nav_about: "О нас", nav_reviews: "Отзывы",
@@ -1387,28 +1655,29 @@
       d_greek_salad: "Греческий салат", d_greek_salad_d: "Томаты, огурцы, оливки, сыр фета",
       d_sher_salad_d: "Авторский рецепт шеф-повара — секретный",
       d_caesar: "Салат Цезарь с курицей", d_caesar_d: "Романный салат, крутоны, пармезан",
-      d_kiploki: "Чесночные кольца", d_kiploki_d: "Хрустящие, в жареном чесночном соусе",
-      d_fries: "Картошка Фри", d_fries_d: "Хрустящий, золотисто-коричневый",
-      d_daivinas: "Картошка Дольки", d_daivinas_d: "Запечённые в нежном сливочном соусе",
+      d_kiploki: "Чесночные гренки", d_kiploki_d: "Хрустящие, с чесноком",
+      d_fries: "Картошка Фри", d_fries_d: "Хрустящий, золотисто-коричневый (200г)",
+      d_daivinas: "Картошка Дольки", d_daivinas_d: "Запечённые дольки (200г)",
       d_majas_kart: "Домашняя картошка", d_majas_kart_d: "Запечённая с розмарином и чесноком",
       d_risi: "Рис", d_risi_d: "Приготовленный на пару с куркумой",
-      d_baklazani: "Баклажаны с сыром фета и орехами", d_baklazani_d: "Жареный баклажан, фета, лесные орехи",
-      d_vistas_gala: "Курица", d_vistas_gala_d: "Маринованная, приготовленная на живых углях",
-      d_cukgala: "Свинина", d_cukgala_d: "Сочная, со специями",
+      d_baklazani: "Рулетики из баклажан с фетой", d_baklazani_d: "Жареный баклажан, фета, лесные орехи",
+      d_gurki: "Маринованный огурец", d_gurki_d: "По домашнему рецепту",
+      d_vistas_gala: "Шашлык из курицы", d_vistas_gala_d: "Маринованная, приготовленная на живых углях",
+      d_cukgala: "Шашлык из свинины", d_cukgala_d: "Сочная, со специями",
       d_cukgala_rib: "Свиные рёбрышки", d_cukgala_rib_d: "Долго маринованные рёбра на углях",
       d_jera_kebabs: "Люля-кебаб из баранины", d_jera_kebabs_d: "Рубленая баранина с зеленью",
       d_jera_rib: "Бараньи рёбрышки", d_jera_rib_d: "Рецепт кавказских традиций",
       d_jera_karb: "Баранья корейка", d_jera_karb_d: "Премиальный отруб, нежная структура",
-      d_stores: "Шашлык из осетрины", d_stores_d: "Свежее филе осетра, маринованное с цитрусами",
-      d_lasis: "Гриль-лосось", d_lasis_d: "Отборный лосось на кедровой доске",
-      d_darzeni_ogles: "Жареные овощи на углях", d_darzeni_ogles_d: "Сезонные овощи с базиликом",
-      d_auksta_zupa: "Холодный суп", d_auksta_zupa_d: "Освежающий летний суп с овощами",
+      d_lasis: "Гриль-лосось", d_lasis_d: "Отборный лосось на углях",
+      d_darzeni_ogles: "Жареные овощи на углях", d_darzeni_ogles_d: "Сезонные овощи с базиликом (300г)",
       d_harcho: "Харчо", d_harcho_d: "Традиционный грузинский суп с рисом",
-      d_frikadelu: "Суп с фрикадельками", d_frikadelu_d: "Домашний суп — тёплый и уютный",
+      d_frikadelu: "Суп с фрикадельками", d_frikadelu_d: "Домашний суп — ½ порции 5,00 €",
       d_turku_kebabs: "Турецкий кебаб", d_turku_kebabs_d: "Кебаб в лаваше с соусом",
       d_plovs_d: "Традиционный плов с бараниной и шафраном",
       d_dolma: "Долма", d_dolma_d: "Рулетики из мясного фарша в виноградных листьях",
-      d_hinkali_d: "Лепные пельмени с сочной начинкой",
+      d_hinkali_d: "Лепные пельмени с сочной начинкой — большая порция 15,00 €",
+      d_gutabs_zal: "Гутаб с зеленью", d_gutabs_zal_d: "Традиционное азербайджанское блюдо",
+      d_gutabs_gala: "Гутаб с мясом", d_gutabs_gala_d: "Традиционное азербайджанское блюдо",
       d_chureks: "Чурек", d_chureks_d: "Традиционная среднеазиатская лепёшка, свежая каждый день",
       d_lavasz: "Лаваш", d_lavasz_d: "Тонкий армянский хлеб, горячий из тандыра",
       d_adzhika: "Аджика", d_adzhika_d: "Острая кавказская приправа",
@@ -1420,21 +1689,36 @@
       rev1_text: "Великолепные шашлыки и плов! Ужин в этом кафе — как путешествие на Кавказ: ароматы, вкусы и тёплая атмосфера. Обязательно вернёмся с семьёй!",
       rev2_text: "Хинкали просто невероятные — сочные, лепные, прямо как в Тбилиси! Персонал очень дружелюбный. Место немного нетипичное для Риги, но в этом и его шарм.",
       rev3_text: "Пришёл впервые с коллегами — все были в восторге. Лосось на углях был идеален. Цены честные, порции большие. Это тайная жемчужина района!",
-      res_label: "Бронирование", res_title: "Забронировать столик",
-      res_sub: "Оставьте заявку — и мы подготовим лучший столик к вашему визиту.",
+      res_label: "Заказ", res_title: "Забронировать / Заказать",
+      res_sub: "Выберите тип — и отправьте заявку через WhatsApp.",
+      ot_reservation: "Бронь столика", ot_takeaway: "Самовывоз", ot_delivery: "Доставка",
       f_name: "Ваше имя", f_phone: "Телефон", f_date: "Дата", f_time: "Время",
+      f_time_pickup: "Время самовывоза",
       f_time_ph: "Выберите время", f_guests: "Количество гостей",
       f_wishes: "Пожелания", f_optional: "(необязательно)",
       f_wishes_ph: "Детский стул, аллергии, день рождения...",
-      f_submit: "Отправить заявку",
+      f_order: "Заказ — выберите блюда",
+      f_zone: "Зона доставки", f_zone_ph: "Выберите район",
+      f_address: "Адрес",
+      f_submit: "Отправить в WhatsApp",
+      f_submit_takeaway: "Отправить в WhatsApp",
+      f_submit_delivery: "Отправить в WhatsApp",
+      takeaway_info: "Выберите блюда из меню и укажите время самовывоза. Мы приготовим заказ к вашему приходу.",
+      delivery_zones_title: "Зоны бесплатной доставки",
+      delivery_zones_list: "🟢 Центр · Пардаугава · Плявниеки · Кенгарагс",
+      delivery_zones_note: "Доставка в другие районы не осуществляется",
       cont_title: "Как нас найти",
       cont_addr_label: "Адрес", cont_hours_label: "Режим работы", cont_phone_label: "Телефон",
       day_tue_sat: "Вт – Сб", day_sun: "Воскресенье", day_mon: "Понедельник", closed: "Закрыто",
       map_open: "Открыть в картах",
       footer_copy: "© 2026 Šeherezāde. Все права защищены.",
       footer_tag: "Кавказская и восточная кухня в Риге",
-      toast_title: "Спасибо!", toast_body: "Ваша заявка получена. Мы свяжемся с вами в ближайшее время для подтверждения брони. Ждём вас в Шехерезаде!", toast_close: "Отлично!",
-      sending: "Отправляем..."
+      toast_title: "В WhatsApp!", toast_body: "Вы будете перенаправлены в WhatsApp. Нажмите 'Отправить' — и мы быстро свяжемся с вами!", toast_close: "Понятно!",
+      err_fields: "Пожалуйста, заполните обязательные поля.",
+      err_phone: "Пожалуйста, введите корректный номер телефона.\nНапример: +371 26000000",
+      err_order: "Пожалуйста, выберите хотя бы одно блюдо.",
+      err_zone: "Пожалуйста, выберите зону доставки.",
+      err_address: "Пожалуйста, введите адрес доставки.",
     },
     en: {
       nav_menu: "Menu", nav_about: "About", nav_reviews: "Reviews",
@@ -1458,28 +1742,29 @@
       d_greek_salad: "Greek salad", d_greek_salad_d: "Tomatoes, cucumbers, olives, feta",
       d_sher_salad_d: "Chef's secret recipe",
       d_caesar: "Caesar salad with chicken", d_caesar_d: "Romaine lettuce, croutons, parmesan",
-      d_kiploki: "Garlic rings", d_kiploki_d: "Crispy, in fried garlic sauce",
-      d_fries: "French fries", d_fries_d: "Crispy, golden brown",
-      d_daivinas: "Potato wedges", d_daivinas_d: "Baked in creamy sauce",
+      d_kiploki: "Garlic croutons", d_kiploki_d: "Crispy, with garlic",
+      d_fries: "French fries", d_fries_d: "Crispy, golden brown (200g)",
+      d_daivinas: "Potato wedges", d_daivinas_d: "Baked wedges (200g)",
       d_majas_kart: "Home-style potatoes", d_majas_kart_d: "Roasted with rosemary and garlic",
       d_risi: "Rice", d_risi_d: "Steamed, with turmeric",
-      d_baklazani: "Eggplant with feta and nuts", d_baklazani_d: "Grilled eggplant slice, feta, hazelnuts",
-      d_vistas_gala: "Chicken", d_vistas_gala_d: "Marinated, cooked on live coals",
-      d_cukgala: "Pork", d_cukgala_d: "Juicy, with spices",
+      d_baklazani: "Eggplant rolls with feta", d_baklazani_d: "Grilled eggplant, feta, hazelnuts",
+      d_gurki: "Pickled cucumber", d_gurki_d: "Home recipe",
+      d_vistas_gala: "Chicken shashlik", d_vistas_gala_d: "Marinated, cooked on live coals",
+      d_cukgala: "Pork shashlik", d_cukgala_d: "Juicy, with spices",
       d_cukgala_rib: "Pork ribs", d_cukgala_rib_d: "Long-marinated ribs on charcoal",
       d_jera_kebabs: "Lamb lula kebab", d_jera_kebabs_d: "Minced lamb with herbs",
       d_jera_rib: "Lamb ribs", d_jera_rib_d: "Caucasian traditional recipe",
       d_jera_karb: "Lamb chop", d_jera_karb_d: "Premium cut, tender texture",
-      d_stores: "Sturgeon shashlik", d_stores_d: "Fresh sturgeon fillet, citrus marinade",
-      d_lasis: "Grilled salmon", d_lasis_d: "Select salmon on cedar plank",
-      d_darzeni_ogles: "Charcoal-grilled vegetables", d_darzeni_ogles_d: "Seasonal vegetables with basil",
-      d_auksta_zupa: "Cold soup", d_auksta_zupa_d: "Refreshing summer soup with vegetables",
+      d_lasis: "Grilled salmon", d_lasis_d: "Select salmon on coals",
+      d_darzeni_ogles: "Charcoal-grilled vegetables", d_darzeni_ogles_d: "Seasonal vegetables with basil (300g)",
       d_harcho: "Kharcho", d_harcho_d: "Traditional Georgian soup with rice",
-      d_frikadelu: "Meatball soup", d_frikadelu_d: "Home-style meatball soup, warm and cozy",
+      d_frikadelu: "Meatball soup", d_frikadelu_d: "Home-style meatball soup — ½ portion 5.00 €",
       d_turku_kebabs: "Turkish kebab", d_turku_kebabs_d: "Kebab wrapped in lavash with sauce",
       d_plovs_d: "Traditional plov with lamb and saffron",
       d_dolma: "Dolma", d_dolma_d: "Minced meat rolls in grape leaves",
-      d_hinkali_d: "Hand-crafted dumplings with juicy filling",
+      d_hinkali_d: "Hand-crafted dumplings with juicy filling — large portion 15.00 €",
+      d_gutabs_zal: "Gutab with greens", d_gutabs_zal_d: "Traditional Azerbaijani dish",
+      d_gutabs_gala: "Gutab with meat", d_gutabs_gala_d: "Traditional Azerbaijani dish",
       d_chureks: "Churek", d_chureks_d: "Traditional Central Asian flatbread, freshly baked",
       d_lavasz: "Lavash", d_lavasz_d: "Thin Armenian flatbread, hot from the tandoor",
       d_adzhika: "Adjika", d_adzhika_d: "Spicy Caucasian condiment paste",
@@ -1491,21 +1776,123 @@
       rev1_text: "Wonderful shashlik and plov! Dining here is like a journey to the Caucasus — the aromas, flavours and warm atmosphere. We will definitely come back with the family!",
       rev2_text: "The khinkali are simply amazing — juicy, handmade, just like in Tbilisi! The staff is very friendly. The place is a bit unusual for Riga, but that's exactly its charm.",
       rev3_text: "Came here for the first time with colleagues — everyone was delighted. The salmon on coals was perfect. Fair prices, generous portions. This place is a hidden gem in the neighbourhood!",
-      res_label: "Reservation", res_title: "Reserve a table",
-      res_sub: "Leave a request — and we will prepare the best table for your visit.",
+      res_label: "Order", res_title: "Reserve / Order",
+      res_sub: "Choose a type — and send your request via WhatsApp.",
+      ot_reservation: "Table reservation", ot_takeaway: "Takeaway", ot_delivery: "Delivery",
       f_name: "Your name", f_phone: "Phone", f_date: "Date", f_time: "Time",
+      f_time_pickup: "Pickup time",
       f_time_ph: "Choose time", f_guests: "Number of guests",
       f_wishes: "Wishes", f_optional: "(optional)",
       f_wishes_ph: "High chair, allergies, birthday...",
-      f_submit: "Send request",
+      f_order: "Order — choose dishes",
+      f_zone: "Delivery zone", f_zone_ph: "Choose district",
+      f_address: "Address",
+      f_submit: "Send to WhatsApp",
+      f_submit_takeaway: "Send to WhatsApp",
+      f_submit_delivery: "Send to WhatsApp",
+      takeaway_info: "Choose dishes from the menu and specify the pickup time. We will have your order ready.",
+      delivery_zones_title: "Free delivery zones",
+      delivery_zones_list: "🟢 Centre · Pārdaugava · Plāvnieki · Kengarags",
+      delivery_zones_note: "Delivery to other areas is not available",
       cont_title: "How to find us",
       cont_addr_label: "Address", cont_hours_label: "Opening hours", cont_phone_label: "Phone",
       day_tue_sat: "Tue – Sat", day_sun: "Sunday", day_mon: "Monday", closed: "Closed",
       map_open: "Open in maps",
       footer_copy: "© 2026 Šeherezāde. All rights reserved.",
       footer_tag: "Caucasian & Eastern cuisine in Riga",
-      toast_title: "Thank you!", toast_body: "Your request has been received. We will contact you shortly to confirm the reservation. We look forward to seeing you at Šeherezāde!", toast_close: "Wonderful!",
-      sending: "Sending..."
+      toast_title: "To WhatsApp!", toast_body: "You will be redirected to WhatsApp. Press 'Send' — and we will get back to you quickly!", toast_close: "Got it!",
+      err_fields: "Please fill in the required fields.",
+      err_phone: "Please enter a valid phone number.\nExample: +371 26000000",
+      err_order: "Please select at least one dish.",
+      err_zone: "Please select a delivery zone.",
+      err_address: "Please enter the delivery address.",
+    },
+    az: {
+      nav_menu: "Menyu", nav_about: "Haqqımızda", nav_reviews: "Rəylər",
+      nav_contacts: "Əlaqə", nav_cta: "Masa rezerv et",
+      hero_eyebrow: "Qafqaz və Şərq mətbəxi · Riqa",
+      hero_sub: "Həqiqi kebab, xinkali və plov olan rahat kafe. Riqa şəhərinin mərkəzində Şərq qonaqpərvərliyi.",
+      hero_cta1: "Masa rezerv et", hero_cta2: "Menyuya bax",
+      stat_google: "Google reytinqi", stat_dishes: "Menyu yeməkləri", stat_years: "İldən çox",
+      about_label: "Haqqımızda",
+      about_title: "Qəlbdən Şərq qonaqpərvərliyi",
+      about_img_ph: "İnteryer fotosu",
+      about_p1: "Şəhərazad — 10 ildən çox qoruduğumuz ənənəvi Qafqaz və Orta Asiya reseptləri ilə hər yeməyin hazırlandığı ailə kafesidir.",
+      about_p2: "Ətirli plov, canlı közün üzərindəki şirəli kebablar, əl işi xinkali və hər səhər təzə bişirilən lavaş — burada hər yemək öz hekayəsini danışır.",
+      about_p3: "Hər yeni qonaqla birlikdə qurulan istilik saxlayırıq: yad kimi gəlin — dost kimi gedin.",
+      hi_years: "Kömür üzərində il", hi_reviews: "Google rəyi", hi_rating: "Orta reytinq",
+      menu_label: "Ēdienkarte · Menyu", menu_title: "İnteraktiv menyu",
+      menu_sub: "Kateqoriya seçin. Qiymətlər avroda göstərilir.",
+      tab_salati: "Salatlar & Qarnirlar", tab_saszliki: "Kebablar", tab_pamat: "Əsas yeməklər",
+      tab_maize: "Çörək", tab_merces: "Souslar",
+      d_veg_salad: "Tərəvəz salatı", d_veg_salad_d: "Təzə tərəvəzlər, otlar, zeytun yağı",
+      d_greek_salad: "Yunan salatı", d_greek_salad_d: "Pomidor, xiyar, zeytun, feta pendiri",
+      d_sher_salad_d: "Aşpazın müəllif resepti — sirr",
+      d_caesar: "Toyuqlu Sezar salatı", d_caesar_d: "Romaine kəlimi, krutonlar, parmezan",
+      d_kiploki: "Sarımsaq krutonları", d_kiploki_d: "Xırtıldayan, sarımsaqla",
+      d_fries: "Qızarmış kartof", d_fries_d: "Xırtıldayan, qızılı-qəhvəyi (200q)",
+      d_daivinas: "Kartof dilimləri", d_daivinas_d: "Bişirilmiş dilimlər (200q)",
+      d_majas_kart: "Ev üslubu kartof", d_majas_kart_d: "Rozmarin və sarımsaqla qızardılmış",
+      d_risi: "Düyü", d_risi_d: "Buxarlanmış, turmerikli",
+      d_baklazani: "Fetali badımcan ruleti", d_baklazani_d: "Qızardılmış badımcan, feta, fındıq",
+      d_gurki: "Turşu xiyar", d_gurki_d: "Ev resepti",
+      d_vistas_gala: "Toyuq kebabı", d_vistas_gala_d: "Marinadlı, canlı közün üzərindəki",
+      d_cukgala: "Donuz əti kebabı", d_cukgala_d: "Şirəli, ədviyyatlı",
+      d_cukgala_rib: "Donuz qabırğası", d_cukgala_rib_d: "Uzun marinadlı qabırğa közün üzərindəki",
+      d_jera_kebabs: "Quzu lülə kebabı", d_jera_kebabs_d: "Doğranmış quzu əti otlarla",
+      d_jera_rib: "Quzu qabırğası", d_jera_rib_d: "Qafqaz ənənəvi resepti",
+      d_jera_karb: "Quzu kotleti", d_jera_karb_d: "Premium kəsim, yumşaq tekstura",
+      d_lasis: "Qril qızılbalıq", d_lasis_d: "Seçilmiş qızılbalıq közün üzərindəki",
+      d_darzeni_ogles: "Közde qızardılmış tərəvəz", d_darzeni_ogles_d: "Mövsümi tərəvəzlər fəsəngənlə (300q)",
+      d_harcho: "Xarço", d_harcho_d: "Ənənəvi Gürcü şorbası düyü ilə",
+      d_frikadelu: "Köftə şorbası", d_frikadelu_d: "Ev üslubu köftə şorbası — ½ porsiya 5.00 €",
+      d_turku_kebabs: "Türk kebabı", d_turku_kebabs_d: "Lavaja bükülmüş kebab sousla",
+      d_plovs_d: "Quzu əti və zəfəranla ənənəvi plov",
+      d_dolma: "Dolma", d_dolma_d: "Üzüm yarpağında bükülmüş ət köftəsi",
+      d_hinkali_d: "Əl işi xəmirli həmər — böyük porsiya 15.00 €",
+      d_gutabs_zal: "Göyərtili qutab", d_gutabs_zal_d: "Ənənəvi Azərbaycan yeməyi",
+      d_gutabs_gala: "Ətli qutab", d_gutabs_gala_d: "Ənənəvi Azərbaycan yeməyi",
+      d_chureks: "Çörək", d_chureks_d: "Ənənəvi Orta Asiya çörəyi, hər gün təzə",
+      d_lavasz: "Lavaş", d_lavasz_d: "Nazik erməni çörəyi, tandırdan isti",
+      d_adzhika: "Adjika", d_adzhika_d: "Ədviyyatlı Qafqaz sousu",
+      d_ketchup: "Ketchup", d_ketchup_d: "Klassik pomidor ketchupu",
+      d_majoneze: "Sarımsaqlı mayonez", d_majoneze_d: "Ev mayonezi təzə sarımsaqla",
+      d_krejums: "Qaymaq", d_krejums_d: "Təbii kənd qaymağı",
+      reviews_label: "Rəylər", reviews_title: "Qonaqlarımız nə deyir",
+      reviews_count: "175 rəy · Google",
+      rev1_text: "Möhtəşəm kebab və plov! Burada yemək Qafqaza səyahət kimidir — aromalar, dadlar və isti atmosfer. Ailə ilə mütləq qayıdacağıq!",
+      rev2_text: "Xinkali sadəcə inanılmazdır — şirəli, əl işi, elə bil Tbilisidədir! Heyət çox mehriban. Yer Riqa üçün bir az qeyri-adi, amma elə onun cazibəsi budur.",
+      rev3_text: "İlk dəfə həmkarlarımla gəldim — hamı heyran qaldı. Közün üzərindəki qızılbalıq mükəmməl idi. Qiymətlər dürüst, porsiyalar böyük. Bu yer rayonun gizli incisidir!",
+      res_label: "Sifariş", res_title: "Rezerv / Sifariş",
+      res_sub: "Növü seçin — və WhatsApp vasitəsilə müraciət göndərin.",
+      ot_reservation: "Masa rezervasiyası", ot_takeaway: "Özüm götürəcəyəm", ot_delivery: "Çatdırılma",
+      f_name: "Adınız", f_phone: "Telefon", f_date: "Tarix", f_time: "Vaxt",
+      f_time_pickup: "Götürmə vaxtı",
+      f_time_ph: "Vaxt seçin", f_guests: "Qonaq sayı",
+      f_wishes: "Istəklər", f_optional: "(isteğe bağlı)",
+      f_wishes_ph: "Uşaq kürsüsü, allergiya, ad günü...",
+      f_order: "Sifariş — yeməkləri seçin",
+      f_zone: "Çatdırılma zonası", f_zone_ph: "Rayon seçin",
+      f_address: "Ünvan",
+      f_submit: "WhatsApp-a göndər",
+      f_submit_takeaway: "WhatsApp-a göndər",
+      f_submit_delivery: "WhatsApp-a göndər",
+      takeaway_info: "Menyudan yeməkləri seçin və götürmə vaxtını göstərin. Sifarişinizi hazırlayacağıq.",
+      delivery_zones_title: "Pulsuz çatdırılma zonaları",
+      delivery_zones_list: "🟢 Mərkəz · Pārdaugava · Plāvnieki · Kengarags",
+      delivery_zones_note: "Digər ərazilərə çatdırılma mövcud deyil",
+      cont_title: "Bizi necə tapmaq olar",
+      cont_addr_label: "Ünvan", cont_hours_label: "İş saatları", cont_phone_label: "Telefon",
+      day_tue_sat: "Sal – Şnb", day_sun: "Bazar", day_mon: "Bazar ertəsi", closed: "Bağlı",
+      map_open: "Xəritədə aç",
+      footer_copy: "© 2026 Šeherezāde. Bütün hüquqlar qorunur.",
+      footer_tag: "Riqada Qafqaz və Şərq mətbəxi",
+      toast_title: "WhatsApp-a!", toast_body: "WhatsApp-a yönləndiriləcəksiniz. 'Göndər' düyməsinə basın — tez əlaqə saxlayacağıq!", toast_close: "Başa düşdüm!",
+      err_fields: "Zəhmət olmasa, məcburi xanaları doldurun.",
+      err_phone: "Zəhmət olmasa, etibarlı telefon nömrəsi daxil edin.\nMəsələn: +371 26000000",
+      err_order: "Zəhmət olmasa, ən azı bir yemək seçin.",
+      err_zone: "Zəhmət olmasa, çatdırılma zonasını seçin.",
+      err_address: "Zəhmət olmasa, çatdırılma ünvanını daxil edin.",
     }
   };
 
@@ -1513,8 +1900,10 @@
 
   function setLang(lang) {
     currentLang = lang;
-    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.lang-btn').forEach(b => { if (b.textContent.toLowerCase() === lang) b.classList.add('active'); });
+    document.querySelectorAll('.lang-btn').forEach(b => {
+      b.classList.remove('active');
+      if (b.textContent.toLowerCase() === lang) b.classList.add('active');
+    });
     const t = translations[lang];
     document.querySelectorAll('[data-t]').forEach(el => {
       const key = el.getAttribute('data-t');
@@ -1525,6 +1914,9 @@
       if (t[key] !== undefined) el.placeholder = t[key];
     });
     document.documentElement.lang = lang;
+    // rebuild menu lists with new language
+    buildMenuList('t-menu-list');
+    buildMenuList('d-menu-list');
   }
 
   // ─── NAVBAR SCROLL ──────────────────────────────────────────────
@@ -1555,83 +1947,153 @@
     event.currentTarget.classList.add('active');
   }
 
-  // ─── TELEGRAM RESERVATION ───────────────────────────────────────
-  const TG_TOKEN   = '8678522585:AAHWPCLKw7f_rN6R_RPF753F-9NZ5T1RLcs';
-  const TG_CHAT_ID = '8378262074';
+  // ─── ORDER TYPE SWITCHER ─────────────────────────────────────────
+  let currentOrderType = 'reservation';
 
-  async function submitForm() {
-    const name   = document.getElementById('f-name').value.trim();
-    const phone  = document.getElementById('f-phone').value.trim();
-    const date   = document.getElementById('f-date').value;
-    const time   = document.getElementById('f-time').value;
-    const guests = document.getElementById('f-guests').value;
-    const wishes = document.getElementById('f-wishes').value.trim();
+  function setOrderType(type) {
+    currentOrderType = type;
+    document.querySelectorAll('.order-type-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('ot-' + type).classList.add('active');
+    ['reservation','takeaway','delivery'].forEach(t => {
+      document.getElementById('form-' + t).style.display = (t === type) ? 'block' : 'none';
+    });
+  }
+
+  // ─── MENU ORDER LIST (for takeaway + delivery) ────────────────────
+  function buildMenuList(containerId) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    container.innerHTML = '';
+    menuItems.forEach(item => {
+      const nameKey = 'name_' + currentLang;
+      const name = item[nameKey] || item.name_lv;
+      const div = document.createElement('div');
+      div.className = 'menu-order-item';
+      div.innerHTML = `
+        <span class="menu-order-item-name">${name}</span>
+        <span class="menu-order-item-price">${item.price} €</span>
+        <div class="qty-control">
+          <button class="qty-btn" onclick="changeQty('${item.id}', -1, '${containerId}')">−</button>
+          <span class="qty-num" id="qty-${item.id}-${containerId}">${quantities[item.id]}</span>
+          <button class="qty-btn" onclick="changeQty('${item.id}', 1, '${containerId}')">+</button>
+        </div>`;
+      container.appendChild(div);
+    });
+  }
+
+  function changeQty(itemId, delta, containerId) {
+    quantities[itemId] = Math.max(0, (quantities[itemId] || 0) + delta);
+    const el = document.getElementById('qty-' + itemId + '-' + containerId);
+    if (el) el.textContent = quantities[itemId];
+  }
+
+  function getOrderLines() {
+    const lines = [];
+    menuItems.forEach(item => {
+      if (quantities[item.id] > 0) {
+        const nameKey = 'name_' + currentLang;
+        const name = item[nameKey] || item.name_lv;
+        lines.push(`  • ${name} × ${quantities[item.id]} = ${(parseFloat(item.price) * quantities[item.id]).toFixed(2)} €`);
+      }
+    });
+    return lines;
+  }
+
+  // ─── WHATSAPP SUBMIT ─────────────────────────────────────────────
+  const WA_NUMBER = '37125405784';
+
+  function submitWhatsApp(type) {
     const t = translations[currentLang];
 
-    if (!name || !phone || !date || !time) {
-      const msgs = { lv: 'Lūdzu, aizpildiet obligātos laukus.', ru: 'Пожалуйста, заполните обязательные поля.', en: 'Please fill in the required fields.' };
-      alert(msgs[currentLang]); return;
+    if (type === 'reservation') {
+      const name   = document.getElementById('r-name').value.trim();
+      const phone  = document.getElementById('r-phone').value.trim();
+      const date   = document.getElementById('r-date').value;
+      const time   = document.getElementById('r-time').value;
+      const guests = document.getElementById('r-guests').value;
+      const wishes = document.getElementById('r-wishes').value.trim();
+
+      if (!name || !phone || !date || !time) { alert(t.err_fields); return; }
+
+      const dateFormatted = date ? new Date(date).toLocaleDateString('ru-RU', {day:'2-digit',month:'2-digit',year:'numeric'}) : '—';
+      const msg =
+`🔥 Rezervācija — Šeherezāde
+
+👤 ${name}
+📞 ${phone}
+📅 ${dateFormatted}
+⏰ ${time}
+👥 ${guests} pers.
+💬 ${wishes || '—'}
+
+_šeherezade.lv_`;
+      openWhatsApp(msg);
+
+    } else if (type === 'takeaway') {
+      const name  = document.getElementById('t-name').value.trim();
+      const phone = document.getElementById('t-phone').value.trim();
+      const time  = document.getElementById('t-time').value;
+      const wishes = document.getElementById('t-wishes').value.trim();
+      const lines = getOrderLines();
+
+      if (!name || !phone || !time) { alert(t.err_fields); return; }
+      if (lines.length === 0) { alert(t.err_order); return; }
+
+      const total = menuItems.reduce((sum, item) => sum + parseFloat(item.price) * (quantities[item.id] || 0), 0);
+      const msg =
+`🥡 Samovyvoza pasūtījums — Šeherezāde
+
+👤 ${name}
+📞 ${phone}
+⏰ Paņemšana: ${time}
+
+🍽️ Pasūtījums:
+${lines.join('\n')}
+
+💰 Kopā: ${total.toFixed(2)} €
+💬 ${wishes || '—'}
+
+_šeherezade.lv_`;
+      openWhatsApp(msg);
+
+    } else if (type === 'delivery') {
+      const name    = document.getElementById('d-name').value.trim();
+      const phone   = document.getElementById('d-phone').value.trim();
+      const zone    = document.getElementById('d-zone').value;
+      const address = document.getElementById('d-address').value.trim();
+      const wishes  = document.getElementById('d-wishes').value.trim();
+      const lines   = getOrderLines();
+
+      if (!name || !phone) { alert(t.err_fields); return; }
+      if (!zone) { alert(t.err_zone); return; }
+      if (!address) { alert(t.err_address); return; }
+      if (lines.length === 0) { alert(t.err_order); return; }
+
+      const total = menuItems.reduce((sum, item) => sum + parseFloat(item.price) * (quantities[item.id] || 0), 0);
+      const msg =
+`🛵 Piegādes pasūtījums — Šeherezāde
+
+👤 ${name}
+📞 ${phone}
+📍 Rajons: ${zone}
+🏠 Adrese: ${address}
+
+🍽️ Pasūtījums:
+${lines.join('\n')}
+
+💰 Kopā: ${total.toFixed(2)} € (bezmaksas piegāde)
+💬 ${wishes || '—'}
+
+_šeherezade.lv_`;
+      openWhatsApp(msg);
     }
+  }
 
-    // Phone validation: Latvian (+371 XXXXXXXX, 8 digits) or any international format
-    // Strips spaces, dashes, parentheses, then checks:
-    // - Latvian: +371 followed by exactly 8 digits
-    // - International: + and country code (1-3 digits) followed by 4-14 digits total
-    const phoneDigits = phone.replace(/[\s\-\(\)]/g, '');
-    const latvianRe   = /^\+?371\d{8}$/;            // +371XXXXXXXX or 371XXXXXXXX
-    const internationalRe = /^\+\d{7,15}$/;          // + and 7–15 digits total
-    const localLatvianRe  = /^(2|6)\d{7}$/;          // local LV mobile/fixed without country code
-    if (!latvianRe.test(phoneDigits) && !internationalRe.test(phoneDigits) && !localLatvianRe.test(phoneDigits)) {
-      const msgs = {
-        lv: 'Lūdzu, ievadiet derīgu tālruņa numuru.\nPiemēram: +371 26000000 vai +44 7911 123456',
-        ru: 'Пожалуйста, введите корректный номер телефона.\nНапример: +371 26000000 или +44 7911 123456',
-        en: 'Please enter a valid phone number.\nExample: +371 26000000 or +44 7911 123456'
-      };
-      alert(msgs[currentLang]); return;
-    }
-
-    const btn = document.getElementById('submitBtn');
-    btn.disabled = true;
-    btn.textContent = t.sending || 'Sending...';
-
-    const dateFormatted = date ? new Date(date).toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit', year: 'numeric' }) : '—';
-
-    const msg =
-`🔥 *Новое бронирование — Šeherezāde*
-
-👤 *Имя:* ${name}
-📞 *Телефон:* ${phone}
-📅 *Дата:* ${dateFormatted}
-⏰ *Время:* ${time}
-👥 *Гостей:* ${guests}
-💬 *Пожелания:* ${wishes || '—'}
-
-_Отправлено с сайта šeherezade.lv_`;
-
-    try {
-      const resp = await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ chat_id: TG_CHAT_ID, text: msg, parse_mode: 'Markdown' })
-      });
-      const data = await resp.json();
-      if (data.ok) {
-        // Clear form
-        ['f-name','f-phone','f-date','f-wishes'].forEach(id => document.getElementById(id).value = '');
-        document.getElementById('f-time').selectedIndex = 0;
-        document.getElementById('f-guests').selectedIndex = 1;
-        showToast();
-      } else {
-        throw new Error(data.description || 'Telegram error');
-      }
-    } catch (err) {
-      console.error(err);
-      const errs = { lv: 'Kļūda nosūtīšanā. Lūdzu, zvaniet uz +371 2000 0000.', ru: 'Ошибка отправки. Пожалуйста, позвоните +371 2000 0000.', en: 'Sending error. Please call +371 2000 0000.' };
-      alert(errs[currentLang]);
-    } finally {
-      btn.disabled = false;
-      btn.textContent = translations[currentLang].f_submit;
-    }
+  function openWhatsApp(msg) {
+    const encoded = encodeURIComponent(msg);
+    const url = `https://wa.me/${WA_NUMBER}?text=${encoded}`;
+    showToast();
+    setTimeout(() => { window.open(url, '_blank'); }, 800);
   }
 
   // ─── TOAST ──────────────────────────────────────────────────────
@@ -1643,12 +2105,18 @@ _Отправлено с сайта šeherezade.lv_`;
   }
 
   // ─── SET DATE MIN ────────────────────────────────────────────────
-  const dateInput = document.getElementById('f-date');
-  const today = new Date(); today.setHours(0,0,0,0);
-  dateInput.min = today.toISOString().split('T')[0];
+  const dateInput = document.getElementById('r-date');
+  if (dateInput) {
+    const today = new Date(); today.setHours(0,0,0,0);
+    dateInput.min = today.toISOString().split('T')[0];
+  }
 
+  // ─── INIT ────────────────────────────────────────────────────────
+  buildMenuList('t-menu-list');
+  buildMenuList('d-menu-list');
   // init wishes placeholder
-  document.getElementById('f-wishes').placeholder = translations.lv.f_wishes_ph;
+  const wishEl = document.querySelector('[data-t-ph="f_wishes_ph"]');
+  if (wishEl) wishEl.placeholder = translations.lv.f_wishes_ph;
 </script>
 </body>
   </html>
