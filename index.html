@@ -2316,20 +2316,36 @@ _šeherezade.lv_`;
       if (!address) { alert(t.err_address); return; }
       if (lines.length === 0) { alert(t.err_order); return; }
 
+      const paid = getTotalPaid();
+      if (paid === 0) {
+        alert(currentLang === 'ru' ? 'Пожалуйста, укажите купюры для оплаты.' :
+              currentLang === 'en' ? 'Please select the banknotes for payment.' :
+              currentLang === 'az' ? 'Zəhmət olmasa, ödəniş üçün banknot seçin.' :
+              'Lūdzu, norādiet kupīras apmaksai!');
+        return;
+      }
+
       const total = menuItems.reduce((sum, item) => sum + parseFloat(item.price) * (quantities[item.id] || 0), 0);
+      const noteParts = Object.entries(banknoteQtys)
+        .filter(([, qty]) => qty > 0)
+        .map(([val, qty]) => qty > 1 ? `${qty}×${val} €` : `${val} €`);
+      const paymentLine = paid >= total
+        ? `\n💵 Kupīras: ${noteParts.join(' + ')}\n🔄 Sīknaudu atpakaļ: ${(paid - total).toFixed(2)} €`
+        : `\n💵 Kupīras: ${noteParts.join(' + ')}\n⚠️ Nepietiek (pasūtījums: ${total.toFixed(2)} €)`;
+
       const msg =
-` Piegādes pasūtījums — Šeherezāde
+`🛵 Piegādes pasūtījums — Šeherezāde
 
- ${name}
- ${phone}
- Rajons: ${zone}
- Adrese: ${address}
+👤 ${name}
+📞 ${phone}
+📍 Rajons: ${zone}
+🏠 Adrese: ${address}
 
- Pasūtījums:
+🍽️ Pasūtījums:
 ${lines.join('\n')}
 
- Kopā: ${total.toFixed(2)} € (bezmaksas piegāde)
- ${wishes || '—'}
+💰 Kopā: ${total.toFixed(2)} € (bezmaksas piegāde)${paymentLine}
+💬 ${wishes || '—'}
 
 _šeherezade.lv_`;
       openWhatsApp(msg);
@@ -2482,68 +2498,6 @@ _šeherezade.lv_`;
     setTimeout(showReviewPrompt, 5000);
   };
 
-  // ─── PATCH DELIVERY SUBMIT TO INCLUDE BANKNOTES & CHANGE ────────
-  // Override submitWhatsApp delivery portion by monkey-patching
-  const _origSubmitWA = submitWhatsApp;
-  window.submitWhatsApp = function(type) {
-    if (type !== 'delivery') {
-      _origSubmitWA(type);
-      return;
-    }
-    const t = translations[currentLang];
-    const name    = document.getElementById('d-name').value.trim();
-    const phone   = document.getElementById('d-phone').value.trim();
-    const zone    = document.getElementById('d-zone').value;
-    const address = document.getElementById('d-address').value.trim();
-    const wishes  = document.getElementById('d-wishes').value.trim();
-    const lines   = getOrderLines();
-
-    if (!name || !phone) { alert(t.err_fields); return; }
-    if (!zone) { alert(t.err_zone); return; }
-    if (!address) { alert(t.err_address); return; }
-    if (lines.length === 0) { alert(t.err_order); return; }
-
-    const total = menuItems.reduce((sum, item) => sum + parseFloat(item.price) * (quantities[item.id] || 0), 0);
-    const paid  = getTotalPaid();
-
-    // Kupīras ir obligātas
-    if (paid === 0) {
-      alert(currentLang === 'ru' ? 'Пожалуйста, укажите купюры для оплаты.' :
-            currentLang === 'en' ? 'Please select the banknotes for payment.' :
-            currentLang === 'az' ? 'Zəhmət olmasa, ödəniş üçün banknot seçin.' :
-            'Lūdzu, norādiet kupīras apmaksai.');
-      return;
-    }
-
-    let paymentLine = '';
-    const noteParts = Object.entries(banknoteQtys)
-      .filter(([, qty]) => qty > 0)
-      .map(([val, qty]) => qty > 1 ? `${qty}×${val} €` : `${val} €`);
-    paymentLine = `\n💵 Kupīras: ${noteParts.join(' + ')}`;
-    if (paid >= total) {
-      paymentLine += `\n🔄 Sīknaudu atpakaļ: ${(paid - total).toFixed(2)} €`;
-    } else {
-      paymentLine += `\n⚠️ Nepietiek (pasūtījums: ${total.toFixed(2)} €)`;
-    }
-
-    const msg =
-`🛵 Piegādes pasūtījums — Šeherezāde
-
-👤 ${name}
-📞 ${phone}
-📍 Rajons: ${zone}
-🏠 Adrese: ${address}
-
-🍽️ Pasūtījums:
-${lines.join('\n')}
-
-💰 Kopā: ${total.toFixed(2)} € (bezmaksas piegāde)${paymentLine}
-💬 ${wishes || '—'}
-
-_šeherezade.lv_`;
-    window.openWhatsApp(msg);
-  };
-
   // init: also hook qty changes to update change info
   const _origChangeQty = changeQty;
   window.changeQty = function(itemId, delta, containerId) {
@@ -2560,4 +2514,4 @@ _šeherezade.lv_`;
   if (wishEl) wishEl.placeholder = translations.lv.f_wishes_ph;
 </script>
 </body>
-              </html>
+  </html>
