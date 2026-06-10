@@ -1032,6 +1032,157 @@
       letter-spacing: 0.04em;
     }
     .wa-btn-info svg { flex-shrink: 0; }
+
+    /* ─── BANKNOTE BUTTONS ─── */
+    .banknote-btn {
+      background: var(--cream);
+      border: 2px solid rgba(74,44,26,0.2);
+      border-radius: 6px;
+      padding: 0.45rem 1rem;
+      font-family: var(--font-sans);
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--smoke);
+      cursor: pointer;
+      transition: all 0.2s;
+      letter-spacing: 0.04em;
+    }
+    .banknote-btn:hover { border-color: var(--terracotta); color: var(--terracotta); }
+    .banknote-btn.selected {
+      background: var(--terracotta);
+      border-color: var(--terracotta);
+      color: #fff;
+    }
+
+    /* ─── FLOATING CALL BUTTON ─── */
+    .float-call-btn {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 1500;
+      background: var(--terracotta);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 0.7rem 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(192,82,42,0.45);
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .float-call-btn:hover {
+      background: var(--ember);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(192,82,42,0.5);
+    }
+    .float-call-btn svg { flex-shrink: 0; }
+
+    /* ─── ORDER TYPE DISABLED STATE ─── */
+    .order-type-btn.disabled-hours {
+      opacity: 0.38;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    .order-type-btn.disabled-hours:hover {
+      border-color: rgba(74,44,26,0.15);
+      color: var(--smoke);
+      transform: none;
+      box-shadow: none;
+    }
+    .hours-closed-notice {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--terracotta);
+      margin-top: 0.75rem;
+      margin-bottom: -0.5rem;
+      letter-spacing: 0.04em;
+      display: none;
+    }
+
+    /* ─── REVIEW PROMPT BANNER ─── */
+    .review-prompt {
+      position: fixed;
+      bottom: 5.5rem;
+      right: 1.5rem;
+      z-index: 1400;
+      background: var(--cream);
+      border: 1.5px solid rgba(74,44,26,0.15);
+      border-radius: 14px;
+      padding: 1.1rem 1.25rem 1rem;
+      max-width: 260px;
+      box-shadow: 0 8px 32px rgba(26,18,9,0.18);
+      display: none;
+      flex-direction: column;
+      gap: 0.6rem;
+      animation: slideInRight 0.4s ease;
+    }
+    .review-prompt.visible { display: flex; }
+    @keyframes slideInRight {
+      from { opacity: 0; transform: translateX(40px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    .review-prompt-title {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      color: var(--coal);
+      font-weight: 600;
+    }
+    .review-stars-row {
+      display: flex;
+      gap: 0.3rem;
+    }
+    .review-star-btn {
+      background: none;
+      border: none;
+      font-size: 1.6rem;
+      cursor: pointer;
+      color: #ccc;
+      transition: color 0.15s, transform 0.15s;
+      padding: 0;
+      line-height: 1;
+    }
+    .review-star-btn.lit { color: var(--gold); transform: scale(1.15); }
+    .review-prompt-actions {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.2rem;
+    }
+    .review-confirm-btn {
+      flex: 1;
+      background: var(--terracotta);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 0.55rem 0.75rem;
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .review-confirm-btn:hover { background: var(--ember); }
+    .review-dismiss-btn {
+      background: transparent;
+      border: 1px solid rgba(74,44,26,0.2);
+      border-radius: 6px;
+      padding: 0.55rem 0.75rem;
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      color: var(--smoke);
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    .review-dismiss-btn:hover { border-color: var(--terracotta); }
   </style>
 </head>
 <body>
@@ -1276,8 +1427,7 @@
         <p class="reservation-subtitle" data-t="res_sub">Izvēlieties veidu — un nosūtiet pieteikumu uz WhatsApp.</p>
       </div>
 
-      <!-- TYPE SELECTOR -->
-      <div class="order-type-selector reveal" style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:2rem;">
+      <!-- TYPE SELECTOR -->\n      <div class="order-type-selector reveal" style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:2rem;">
         <button class="order-type-btn active" onclick="setOrderType('reservation')" id="ot-reservation">
           <span class="ot-icon">🍽️</span>
           <span data-t="ot_reservation">Galdiņa rezervācija</span>
@@ -1291,6 +1441,7 @@
           <span data-t="ot_delivery">Piegāde</span>
         </button>
       </div>
+      <p class="hours-closed-notice" id="hoursClosedNotice" data-t="hours_closed_notice">🕐 Samovyvoza un piegāde pieejama 11:00 – 20:00</p>
 
       <!-- ── RESERVATION FORM ── -->
       <div class="form-card reveal" id="form-reservation">
@@ -1416,6 +1567,17 @@
           <div class="menu-order-list" id="d-menu-list"></div>
         </div>
         <div class="form-group">
+          <label class="form-label" data-t="f_banknotes">Apmaksa skaidrā naudā — kupīra</label>
+          <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:0.25rem;" id="d-banknotes-wrap">
+            <button type="button" class="banknote-btn" data-val="5"  onclick="toggleBanknote(this)">5 €</button>
+            <button type="button" class="banknote-btn" data-val="10" onclick="toggleBanknote(this)">10 €</button>
+            <button type="button" class="banknote-btn" data-val="20" onclick="toggleBanknote(this)">20 €</button>
+            <button type="button" class="banknote-btn" data-val="50" onclick="toggleBanknote(this)">50 €</button>
+            <button type="button" class="banknote-btn" data-val="100" onclick="toggleBanknote(this)">100 €</button>
+          </div>
+          <p id="d-change-info" style="font-size:0.8rem;color:var(--terracotta);margin-top:0.5rem;min-height:1.2em;font-weight:600;"></p>
+        </div>
+        <div class="form-group">
           <label class="form-label" data-t="f_wishes">Papildu vēlmes <span style="opacity:0.5;font-weight:400;" data-t="f_optional">(neobligāti)</span></label>
           <textarea id="d-wishes" class="form-textarea" style="min-height:70px;" placeholder="" data-t-ph="f_wishes_ph"></textarea>
         </div>
@@ -1476,6 +1638,30 @@
     </div>
   </div>
 </section>
+
+<!-- ═══════════════ FLOATING CALL BUTTON ═══════════════ -->
+<a class="float-call-btn" href="tel:+37129446848" aria-label="Pozvanīt">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+  </svg>
+  <span data-t="call_btn">Pozvanīt</span>
+</a>
+
+<!-- ═══════════════ REVIEW PROMPT ═══════════════ -->
+<div class="review-prompt" id="reviewPrompt">
+  <div class="review-prompt-title" data-t="review_prompt_title">Novērtējiet mūs! ⭐</div>
+  <div class="review-stars-row" id="reviewStarsRow">
+    <button class="review-star-btn" data-star="1" onclick="setReviewStar(1)">★</button>
+    <button class="review-star-btn" data-star="2" onclick="setReviewStar(2)">★</button>
+    <button class="review-star-btn" data-star="3" onclick="setReviewStar(3)">★</button>
+    <button class="review-star-btn" data-star="4" onclick="setReviewStar(4)">★</button>
+    <button class="review-star-btn" data-star="5" onclick="setReviewStar(5)">★</button>
+  </div>
+  <div class="review-prompt-actions">
+    <button class="review-confirm-btn" onclick="confirmReview()" data-t="review_confirm">Apstiprināt</button>
+    <button class="review-dismiss-btn" onclick="dismissReview()" data-t="review_dismiss">Vēlāk</button>
+  </div>
+</div>
 
 <!-- ═══════════════ FOOTER ═══════════════ -->
 <footer>
@@ -1632,6 +1818,12 @@
       err_order: "Lūdzu, izvēlieties vismaz vienu ēdienu.",
       err_zone: "Lūdzu, izvēlieties piegādes zonu.",
       err_address: "Lūdzu, ievadiet piegādes adresi.",
+      call_btn: "Pozvanīt",
+      f_banknotes: "Apmaksa skaidrā naudā — kupīra",
+      hours_closed_notice: "🕐 Paņemšana un piegāde pieejama 11:00 – 20:00",
+      review_prompt_title: "Novērtējiet mūs! ⭐",
+      review_confirm: "Apstiprināt",
+      review_dismiss: "Vēlāk",
     },
     ru: {
       nav_menu: "Меню", nav_about: "О нас", nav_reviews: "Отзывы",
@@ -1719,6 +1911,12 @@
       err_order: "Пожалуйста, выберите хотя бы одно блюдо.",
       err_zone: "Пожалуйста, выберите зону доставки.",
       err_address: "Пожалуйста, введите адрес доставки.",
+      call_btn: "Позвонить",
+      f_banknotes: "Оплата наличными — купюра",
+      hours_closed_notice: "🕐 Самовывоз и доставка доступны с 11:00 до 20:00",
+      review_prompt_title: "Оцените нас! ⭐",
+      review_confirm: "Подтвердить",
+      review_dismiss: "Позже",
     },
     en: {
       nav_menu: "Menu", nav_about: "About", nav_reviews: "Reviews",
@@ -1806,6 +2004,12 @@
       err_order: "Please select at least one dish.",
       err_zone: "Please select a delivery zone.",
       err_address: "Please enter the delivery address.",
+      call_btn: "Call us",
+      f_banknotes: "Cash payment — banknote",
+      hours_closed_notice: "🕐 Takeaway & delivery available 11:00 – 20:00",
+      review_prompt_title: "Rate us! ⭐",
+      review_confirm: "Confirm",
+      review_dismiss: "Later",
     },
     az: {
       nav_menu: "Menyu", nav_about: "Haqqımızda", nav_reviews: "Rəylər",
@@ -1893,6 +2097,12 @@
       err_order: "Zəhmət olmasa, ən azı bir yemək seçin.",
       err_zone: "Zəhmət olmasa, çatdırılma zonasını seçin.",
       err_address: "Zəhmət olmasa, çatdırılma ünvanını daxil edin.",
+      call_btn: "Zəng et",
+      f_banknotes: "Nağd ödəniş — banknot",
+      hours_closed_notice: "🕐 Özüm götürəcəyəm və çatdırılma 11:00 – 20:00 arasında mövcuddur",
+      review_prompt_title: "Bizi qiymətləndirin! ⭐",
+      review_confirm: "Təsdiqlə",
+      review_dismiss: "Sonra",
     }
   };
 
@@ -2111,6 +2321,196 @@ _šeherezade.lv_`;
     dateInput.min = today.toISOString().split('T')[0];
   }
 
+  // ─── BANKNOTE SELECTOR ──────────────────────────────────────────
+  let selectedBanknotes = []; // array of values
+
+  function toggleBanknote(btn) {
+    const val = parseInt(btn.dataset.val);
+    const idx = selectedBanknotes.indexOf(val);
+    if (idx === -1) {
+      selectedBanknotes.push(val);
+      btn.classList.add('selected');
+    } else {
+      selectedBanknotes.splice(idx, 1);
+      btn.classList.remove('selected');
+    }
+    updateChangeInfo();
+  }
+
+  function updateChangeInfo() {
+    const info = document.getElementById('d-change-info');
+    if (!info) return;
+    const total = menuItems.reduce((sum, item) => sum + parseFloat(item.price) * (quantities[item.id] || 0), 0);
+    const paid = selectedBanknotes.reduce((a, b) => a + b, 0);
+    if (selectedBanknotes.length === 0 || total === 0) {
+      info.textContent = '';
+      return;
+    }
+    if (paid < total) {
+      info.textContent = '⚠️ Nepietiek naudas. Kopā: ' + total.toFixed(2) + ' €';
+      info.style.color = '#b00';
+    } else {
+      const change = (paid - total).toFixed(2);
+      info.textContent = '✅ Atlikums (sīknaudu): ' + change + ' €';
+      info.style.color = 'var(--terracotta)';
+    }
+  }
+
+  // ─── HOURS CHECK (Riga timezone, 11:00–20:00) ────────────────────
+  function isWithinWorkingHours() {
+    // Get current Riga time
+    const now = new Date();
+    const rigaTime = new Intl.DateTimeFormat('en-GB', {
+      timeZone: 'Europe/Riga',
+      hour: 'numeric',
+      minute: 'numeric',
+      hour12: false
+    }).format(now);
+    const [h, m] = rigaTime.split(':').map(Number);
+    const totalMins = h * 60 + m;
+    return totalMins >= 11 * 60 && totalMins < 20 * 60;
+  }
+
+  function applyHoursRestriction() {
+    const open = isWithinWorkingHours();
+    const takeawayBtn  = document.getElementById('ot-takeaway');
+    const deliveryBtn  = document.getElementById('ot-delivery');
+    const notice       = document.getElementById('hoursClosedNotice');
+    if (open) {
+      takeawayBtn.classList.remove('disabled-hours');
+      deliveryBtn.classList.remove('disabled-hours');
+      if (notice) notice.style.display = 'none';
+    } else {
+      takeawayBtn.classList.add('disabled-hours');
+      deliveryBtn.classList.add('disabled-hours');
+      if (notice) notice.style.display = 'block';
+      // if currently selected type is locked, revert to reservation
+      if (currentOrderType === 'takeaway' || currentOrderType === 'delivery') {
+        setOrderType('reservation');
+      }
+    }
+  }
+
+  applyHoursRestriction();
+  // Re-check every minute
+  setInterval(applyHoursRestriction, 60000);
+
+  // ─── REVIEW PROMPT ───────────────────────────────────────────────
+  const GOOGLE_MAPS_URL = 'https://maps.app.goo.gl/hE24bF6BEGQ7S4ov7';
+  let reviewStarSelected = 0;
+  let reviewShown = false;
+
+  function showReviewPrompt() {
+    if (reviewShown) return;
+    reviewShown = true;
+    const prompt = document.getElementById('reviewPrompt');
+    if (prompt) {
+      prompt.classList.add('visible');
+    }
+  }
+
+  function setReviewStar(n) {
+    reviewStarSelected = n;
+    document.querySelectorAll('.review-star-btn').forEach((btn, i) => {
+      btn.classList.toggle('lit', i < n);
+    });
+  }
+
+  function confirmReview() {
+    if (reviewStarSelected === 5) {
+      window.open(GOOGLE_MAPS_URL, '_blank');
+    }
+    dismissReview();
+  }
+
+  function dismissReview() {
+    const prompt = document.getElementById('reviewPrompt');
+    if (prompt) {
+      prompt.classList.remove('visible');
+    }
+  }
+
+  // ─── HOOK REVIEW PROMPT INTO WHATSAPP SUBMIT ────────────────────
+  // Patch openWhatsApp to show review 5 seconds after order sent
+  const _origOpenWhatsApp = openWhatsApp;
+  // override after order
+  const _patchedOpenWA = function(msg) {
+    _origOpenWhatsApp(msg);
+    setTimeout(showReviewPrompt, 5000);
+  };
+  // Replace reference — need to patch submitWhatsApp callers
+  // We do it by redefining openWhatsApp at runtime:
+  window.openWhatsApp = function(msg) {
+    const encoded = encodeURIComponent(msg);
+    const url = `https://wa.me/${WA_NUMBER}?text=${encoded}`;
+    showToast();
+    setTimeout(() => { window.open(url, '_blank'); }, 800);
+    setTimeout(showReviewPrompt, 5000);
+  };
+
+  // ─── PATCH DELIVERY SUBMIT TO INCLUDE BANKNOTES & CHANGE ────────
+  // Override submitWhatsApp delivery portion by monkey-patching
+  const _origSubmitWA = submitWhatsApp;
+  window.submitWhatsApp = function(type) {
+    if (type !== 'delivery') {
+      _origSubmitWA(type);
+      return;
+    }
+    const t = translations[currentLang];
+    const name    = document.getElementById('d-name').value.trim();
+    const phone   = document.getElementById('d-phone').value.trim();
+    const zone    = document.getElementById('d-zone').value;
+    const address = document.getElementById('d-address').value.trim();
+    const wishes  = document.getElementById('d-wishes').value.trim();
+    const lines   = getOrderLines();
+
+    if (!name || !phone) { alert(t.err_fields); return; }
+    if (!zone) { alert(t.err_zone); return; }
+    if (!address) { alert(t.err_address); return; }
+    if (lines.length === 0) { alert(t.err_order); return; }
+
+    const total = menuItems.reduce((sum, item) => sum + parseFloat(item.price) * (quantities[item.id] || 0), 0);
+    const paid  = selectedBanknotes.reduce((a, b) => a + b, 0);
+    const change = paid >= total ? (paid - total).toFixed(2) : null;
+
+    let paymentLine = '';
+    if (selectedBanknotes.length > 0) {
+      paymentLine = `\n💵 Kupīras: ${selectedBanknotes.map(v => v + ' €').join(' + ')}`;
+      if (change !== null) {
+        paymentLine += `\n🔄 Atlikums (sīknaudu): ${change} €`;
+      } else {
+        paymentLine += `\n⚠️ Nepietiek (pasūtījums: ${total.toFixed(2)} €)`;
+      }
+    } else {
+      paymentLine = '\n💳 Apmaksas veids nav norādīts';
+    }
+
+    const msg =
+`🛵 Piegādes pasūtījums — Šeherezāde
+
+👤 ${name}
+📞 ${phone}
+📍 Rajons: ${zone}
+🏠 Adrese: ${address}
+
+🍽️ Pasūtījums:
+${lines.join('\n')}
+
+💰 Kopā: ${total.toFixed(2)} € (bezmaksas piegāde)${paymentLine}
+💬 ${wishes || '—'}
+
+_šeherezade.lv_`;
+    window.openWhatsApp(msg);
+  };
+
+  // init: also hook qty changes to update change info
+  const _origChangeQty = changeQty;
+  window.changeQty = function(itemId, delta, containerId) {
+    _origChangeQty(itemId, delta, containerId);
+    updateChangeInfo();
+  };
+  // ─── END NEW FEATURES ────────────────────────────────────────────
+
   // ─── INIT ────────────────────────────────────────────────────────
   buildMenuList('t-menu-list');
   buildMenuList('d-menu-list');
@@ -2119,4 +2519,4 @@ _šeherezade.lv_`;
   if (wishEl) wishEl.placeholder = translations.lv.f_wishes_ph;
 </script>
 </body>
-  </html>
+              </html>
