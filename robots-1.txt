@@ -1,0 +1,7 @@
+# robots.txt — Šeherezāde
+# https://notreteams-boop.github.io/sheherezade/
+
+User-agent: *
+Allow: /
+
+Sitemap: https://notreteams-boop.github.io/sheherezade/sitemap.xml
