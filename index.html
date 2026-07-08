@@ -22,20 +22,233 @@
   "@type": "Restaurant",
   "name": "Šeherezāde",
   "url": "https://notreteams-boop.github.io/sheherezade/",
-  "servesCuisine": ["Caucasian", "Azerbaijani"],
+  "telephone": "+37129446848",
   "priceRange": "€€",
-  "openingHoursSpecification": [{
-    "@type": "OpeningHoursSpecification",
-    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-    "opens": "11:00",
-    "closes": "20:00"
-  }],
+  "servesCuisine": ["Caucasian", "Azerbaijani", "Central Asian"],
+  "acceptsReservations": "True",
   "address": {
     "@type": "PostalAddress",
+    "streetAddress": "Ogres iela 1A",
     "addressLocality": "Rīga",
+    "postalCode": "LV-1019",
     "addressCountry": "LV"
   },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 56.9295,
+    "longitude": 24.1614
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      "opens": "11:00",
+      "closes": "20:00"
+    }
+  ],
+  "menu": "https://notreteams-boop.github.io/sheherezade/#menu",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.6",
+    "reviewCount": "175",
+    "bestRating": "5"
+  },
+  "review": [
+    {
+      "@type": "Review",
+      "author": { "@type": "Person", "name": "Anita K." },
+      "datePublished": "2025",
+      "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+      "reviewBody": "Brīnišķīgi šašliki un plovs! Ēšana šajā kafejnīcā ir kā ceļojums uz Kaukāzu — aromāti, garšas un siltā atmosfēra."
+    },
+    {
+      "@type": "Review",
+      "author": { "@type": "Person", "name": "Māris P." },
+      "datePublished": "2024",
+      "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+      "reviewBody": "Hinkaļi ir vienkārši nepārliecināmi — sulīgi, roku darbs. Personāls ļoti draudzīgs un laipns."
+    },
+    {
+      "@type": "Review",
+      "author": { "@type": "Person", "name": "Jēkabs V." },
+      "datePublished": "2025",
+      "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+      "reviewBody": "Gāju šeit pirmo reizi ar kolēģiem — visi bija sajūsmā. Lasis uz oglēm bija ideāls. Cenas godīgas, porcijas lielas."
+    }
+  ],
   "sameAs": ["https://maps.app.goo.gl/hE24bF6BEGQ7S4ov7"]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Menu",
+  "name": "Šeherezāde ēdienkarte",
+  "inLanguage": "lv",
+  "hasMenuSection": [
+    {
+      "@type": "MenuSection",
+      "name": "Salāti & Piedevas",
+      "hasMenuItem": [
+        { "@type": "MenuItem", "name": "Dārzeņu salāti", "description": "Svaigi dārzeņi, garšaugi, olīveļļa", "offers": { "@type": "Offer", "price": "4.00", "priceCurrency": "EUR" } },
+        { "@type": "MenuItem", "name": "Grieķu salāti", "description": "Tomāti, gurķi, olīvas, feta siers", "offers": { "@type": "Offer", "price": "8.50", "priceCurrency": "EUR" } },
+        { "@type": "MenuItem", "name": "Šeherezāde salāti", "description": "Šefpavāra autorrecepts", "offers": { "@type": "Offer", "price": "9.95", "priceCurrency": "EUR" } },
+        { "@type": "MenuItem", "name": "Cēzara salāti ar vistu", "description": "Romānu salāti, grutoni, parmezāns", "offers": { "@type": "Offer", "price": "9.95", "priceCurrency": "EUR" } },
+        { "@type": "MenuItem", "name": "Ķiploku grauzdiņi", "description": "Kraukšķīgi, ar ķiploku", "offers": { "@type": "Offer", "price": "5.50", "priceCurrency": "EUR" } },
+        { "@type": "MenuItem", "name": "Kartupeļi Frī", "description": "Kraukšķīgi, zelta brūni (200 gr)", "offers": { "@type": "Offer", "price": "3.00", "priceCurrency": "EUR" } },
+        { "@type": "MenuItem", "name": "Kartupeļi Daiviņas", "description": "Maigā krēma mērcē cepta (200 gr)", "offers": { "@type": "Offer", "price": "3.50", "priceCurrency": "EUR" } },
+        { "@type": "MenuItem", "name": "Mājas kartupeļi", "description": "Cepti ar rozmarīnu un ķiploku", "offers": { "@type": "Offer", "price": "4.95", "priceCurrency": "EUR" } },
+        { "@type": "MenuItem", "name": "Rīsi", "description": "Tvaicēti, ar kurkumu", "offers": { "@type": "Offer", "price": "3.00", "priceCurrency": "EUR" } },
+        { "@type": "MenuItem", "name": "Baklažānu rullīši ar fetas sieru un riekstiem", "description": "Cepta baklažāna šķēle, feta, lazdu rieksti", "offers": { "@type": "Offer", "price": "9.95", "priceCurrency": "EUR" } }
+      ]
+    },
+    {
+      "@type": "MenuSection",
+      "name": "Šašliki",
+      "hasMenuItem": [
+        { "@type": "MenuItem", "name": "Vistas šašliks", "description": "Marinēta, cepta uz dzīvajām oglēm", "offers": { "@type": "Offer", "price": "10.00", "priceCurrency": "EUR" } },
+        { "@type": "MenuItem", "name": "Cūkgaļas šašliks", "description": "Sulīga, ar garšvielām", "offers": { "@type": "Offer", "price": "10.00", "priceCurrency": "EUR" } },
+        { "@type": "MenuItem", "name": "Cūkgaļas ribiņas", "description": "Ilgi marinētas ribiņas uz oglēm", "offers": { "@type": "Offer", "price": "12.95", "priceCurrency": "EUR" } },
+        { "@type": "MenuItem", "name": "Jēra lula kebabs", "description": "Maltā jēra gaļa ar garšaugiem", "offers": { "@type": "Offer", "price": "13.50", "priceCurrency": "EUR" } },
+        { "@type": "MenuItem", "name": "Jēra ribiņas", "description": "Kaukāza tradīciju recepte", "offers": { "@type": "Offer", "price": "15.50", "priceCurrency": "EUR" } },
+        { "@type": "MenuItem", "name": "Jēra karbonāde", "description": "Premium griezums, maiga struktūra", "offers": { "@type": "Offer", "price": "20.00", "priceCurrency": "EUR" } },
+        { "@type": "MenuItem", "name": "Grilēts lasis", "description": "Atlases lasis uz oglēm", "offers": { "@type": "Offer", "price": "17.50", "priceCurrency": "EUR" } },
+        { "@type": "MenuItem", "name": "Cepti dārzeņi uz oglēm", "description": "Baklažāni, tomāti, paprika, baziliks", "offers": { "@type": "Offer", "price": "12.00", "priceCurrency": "EUR" } }
+      ]
+    },
+    {
+      "@type": "MenuSection",
+      "name": "Pamatēdieni",
+      "hasMenuItem": [
+        { "@type": "MenuItem", "name": "Harčo", "description": "Tradicionāla zupa ar rīsiem", "offers": { "@type": "Offer", "price": "12.00", "priceCurrency": "EUR" } },
+        { "@type": "MenuItem", "name": "Mājas frikadeļu zupa", "description": "Liellopa un jēra gaļa", "offers": { "@type": "Offer", "price": "12.00", "priceCurrency": "EUR" } },
+        { "@type": "MenuItem", "name": "Turku kebabs", "description": "Lavašā satīts vistas kebabs ar mērci", "offers": { "@type": "Offer", "price": "9.95", "priceCurrency": "EUR" } },
+        { "@type": "MenuItem", "name": "Uzbeku plovs", "description": "Tradicionāls plovs ar jēra gaļu un zafirānu", "offers": { "@type": "Offer", "price": "12.00", "priceCurrency": "EUR" } },
+        { "@type": "MenuItem", "name": "Dolma", "description": "Vīnogu lapās tītas maltās gaļas ruļļi", "offers": { "@type": "Offer", "price": "12.00", "priceCurrency": "EUR" } },
+        { "@type": "MenuItem", "name": "Hinkaļi", "description": "Roku darba mīklas maisiņi ar sulīgu gaļas pildījumu", "offers": { "@type": "Offer", "price": "12.00", "priceCurrency": "EUR" } },
+        { "@type": "MenuItem", "name": "Azerbaidžāņu gurza", "description": "Roku darba", "offers": { "@type": "Offer", "price": "15.00", "priceCurrency": "EUR" } },
+        { "@type": "MenuItem", "name": "Gutabs ar zaļumiem", "description": "Tradicionāls Azerbaidžānas ēdiens", "offers": { "@type": "Offer", "price": "9.00", "priceCurrency": "EUR" } },
+        { "@type": "MenuItem", "name": "Gutabs ar gaļu", "description": "Tradicionāls Azerbaidžānas ēdiens", "offers": { "@type": "Offer", "price": "9.00", "priceCurrency": "EUR" } },
+        { "@type": "MenuItem", "name": "Šeherezādes karaliskās brokastis", "description": "Olas, vista, dārzeņu salāti, sautēti dārzeņi", "offers": { "@type": "Offer", "price": "15.50", "priceCurrency": "EUR" } },
+        { "@type": "MenuItem", "name": "Marinēti (dažādi marinēti)", "description": "Mājas marinēti dārzeņi un gaļas izstrādājumi", "offers": { "@type": "Offer", "price": "5.95", "priceCurrency": "EUR" } },
+        { "@type": "MenuItem", "name": "Turku liellopa gaļas kebabs", "description": "Svaiga liellopu gaļa uz dzīvajām oglēm", "offers": { "@type": "Offer", "price": "12.00", "priceCurrency": "EUR" } },
+        { "@type": "MenuItem", "name": "Azerbaidžāņu plovs", "description": "Ar kaltētiem augļiem un jēra gaļu", "offers": { "@type": "Offer", "price": "14.50", "priceCurrency": "EUR" } },
+        { "@type": "MenuItem", "name": "Kufta bozbaš", "description": "Azerbaidžāņu tradicionāla zupa ar gaļas bumbiņām", "offers": { "@type": "Offer", "price": "14.00", "priceCurrency": "EUR" } }
+      ]
+    },
+    {
+      "@type": "MenuSection",
+      "name": "Maize",
+      "hasMenuItem": [
+        { "@type": "MenuItem", "name": "Čureks", "description": "Tradicionālā Vidusāzijas maize, cepta dienā", "offers": { "@type": "Offer", "price": "0.70", "priceCurrency": "EUR" } },
+        { "@type": "MenuItem", "name": "Lavašs", "description": "Plāna Kaukāza maize, karsta no tanūra", "offers": { "@type": "Offer", "price": "0.60", "priceCurrency": "EUR" } }
+      ]
+    },
+    {
+      "@type": "MenuSection",
+      "name": "Mērces",
+      "hasMenuItem": [
+        { "@type": "MenuItem", "name": "Adžika", "description": "Pikanta Kaukāza garšvielu pasta", "offers": { "@type": "Offer", "price": "1.70", "priceCurrency": "EUR" } },
+        { "@type": "MenuItem", "name": "Kečups", "description": "Klasiskais tomātu kečups", "offers": { "@type": "Offer", "price": "1.50", "priceCurrency": "EUR" } },
+        { "@type": "MenuItem", "name": "Majonēze ar ķiplokiem", "description": "Mājas majonēze ar svaigiem ķiplokiem", "offers": { "@type": "Offer", "price": "1.70", "priceCurrency": "EUR" } },
+        { "@type": "MenuItem", "name": "Krējums", "description": "Dabīgais skābais krējums", "offers": { "@type": "Offer", "price": "1.70", "priceCurrency": "EUR" } },
+        { "@type": "MenuItem", "name": "Narsarab", "description": "Azerbaidžāņu granātābolu mērce", "offers": { "@type": "Offer", "price": "2.00", "priceCurrency": "EUR" } }
+      ]
+    },
+    {
+      "@type": "MenuSection",
+      "name": "Deserti",
+      "hasMenuItem": [
+        { "@type": "MenuItem", "name": "Pahlava", "description": "Tradicionāla Azerbaidžāņu cepšana ar riekstiem un medu", "offers": { "@type": "Offer", "price": "3.50", "priceCurrency": "EUR" } },
+        { "@type": "MenuItem", "name": "Saldējums ar augļiem", "description": "Kremveida saldējums ar svaigiem sezonāliem augļiem", "offers": { "@type": "Offer", "price": "5.00", "priceCurrency": "EUR" } },
+        { "@type": "MenuItem", "name": "Pankūkas ar saldējumu", "description": "Maigās pankūkas ar vaniļas saldējumu", "offers": { "@type": "Offer", "price": "6.95", "priceCurrency": "EUR" } }
+      ]
+    },
+    {
+      "@type": "MenuSection",
+      "name": "Dzērieni",
+      "hasMenuItem": [
+        { "@type": "MenuItem", "name": "Tēja", "description": "Krūze / Tējkanna", "offers": { "@type": "Offer", "price": "2.50", "priceCurrency": "EUR" } },
+        { "@type": "MenuItem", "name": "Melnā kafija", "description": "Espresso", "offers": { "@type": "Offer", "price": "3.00", "priceCurrency": "EUR" } },
+        { "@type": "MenuItem", "name": "Balta kafija", "description": "Americano ar pienu", "offers": { "@type": "Offer", "price": "3.50", "priceCurrency": "EUR" } },
+        { "@type": "MenuItem", "name": "Latte kafija", "description": "Klasiskais latte", "offers": { "@type": "Offer", "price": "3.50", "priceCurrency": "EUR" } },
+        { "@type": "MenuItem", "name": "Sula", "description": "Augļu vai dārzeņu sula", "offers": { "@type": "Offer", "price": "2.50", "priceCurrency": "EUR" } },
+        { "@type": "MenuItem", "name": "Ūdens gāzēts / negāzēts", "description": "0,5 l", "offers": { "@type": "Offer", "price": "2.50", "priceCurrency": "EUR" } },
+        { "@type": "MenuItem", "name": "Boržomi ūdens", "description": "Dabīgais minerālūdens", "offers": { "@type": "Offer", "price": "3.50", "priceCurrency": "EUR" } },
+        { "@type": "MenuItem", "name": "Limonādes", "description": "Mājas limonāde, dažādas garšas", "offers": { "@type": "Offer", "price": "3.00", "priceCurrency": "EUR" } },
+        { "@type": "MenuItem", "name": "Piena kokteilis ar saldējumu", "description": "Krēmīgs milkšeiks", "offers": { "@type": "Offer", "price": "4.50", "priceCurrency": "EUR" } },
+        { "@type": "MenuItem", "name": "Kvass", "description": "Tradicionāls maizes dzēriens", "offers": { "@type": "Offer", "price": "2.50", "priceCurrency": "EUR" } }
+      ]
+    },
+    {
+      "@type": "MenuSection",
+      "name": "Alus",
+      "hasMenuItem": [
+        { "@type": "MenuItem", "name": "Tērvetes alus", "description": "Latvijas tumšais alus, 0,5 l", "offers": { "@type": "Offer", "price": "4.50", "priceCurrency": "EUR" } },
+        { "@type": "MenuItem", "name": "Užavas alus", "description": "Latvijas gaišais alus, 0,5 l", "offers": { "@type": "Offer", "price": "4.70", "priceCurrency": "EUR" } },
+        { "@type": "MenuItem", "name": "Valmiermuiža alus", "description": "Latvijas premium alus, 0,5 l", "offers": { "@type": "Offer", "price": "4.95", "priceCurrency": "EUR" } }
+      ]
+    },
+    {
+      "@type": "MenuSection",
+      "name": "Vīni",
+      "hasMenuItem": [
+        { "@type": "MenuItem", "name": "Baltvīns \"KARABAKH\"", "description": "Azerbaidžāņu baltvīns, 100 ml", "offers": { "@type": "Offer", "price": "4.50", "priceCurrency": "EUR" } },
+        { "@type": "MenuItem", "name": "Sarkanvīns \"KARABAKH\"", "description": "Azerbaidžāņu sarkanvīns, 100 ml", "offers": { "@type": "Offer", "price": "4.50", "priceCurrency": "EUR" } },
+        { "@type": "MenuItem", "name": "Granātābolu vīns", "description": "Azerbaidžāņu granātābolu vīns, 100 ml", "offers": { "@type": "Offer", "price": "4.00", "priceCurrency": "EUR" } }
+      ]
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Kas ir hinkaļi?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Hinkaļi ir tradicionāls Kaukāza ēdiens — roku darba mīklas maisiņi ar sulīgu gaļas pildījumu iekšā. Šeherezādē tos gatavo pēc tradicionālas receptes, un tie ir viens no populārākajiem ēdieniem ēdienkartē."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Vai Šeherezāde piedāvā piegādi?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Jā, piegāde ir pieejama darba laikā no 11:00 līdz 20:00. Bezmaksas piegāde ir pieejama pasūtījumiem virs 40 eiro Centra, Purvciema, Pļavnieku un Ķengaraga rajonos. Citos rajonos lūdzu zvanīt, lai precizētu piegādes iespējas."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Kur atrodas Šeherezāde un kādas ir darba stundas?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Kafejnīca atrodas Ogres ielā 1A, Rīgā (LV-1019). Darba laiks ir no otrdienas līdz sestdienai, 11:00–20:00. Svētdienās un pirmdienās kafejnīca ir slēgta."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Vai var rezervēt galdiņu iepriekš?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Jā, rezervāciju var veikt tiešsaistē, izvēloties datumu, laiku un viesu skaitu — pieprasījums tiek nosūtīts tieši uz WhatsApp, un komanda apstiprina rezervāciju."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Kāda virtuve pieejama Šeherezādē?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ēdienkartē ir Kaukāza, Azerbaidžānas un Vidusāzijas virtuves ēdieni: šašliki uz oglēm, hinkaļi, plovs, dolma, gutabi un tradicionālie dzērieni, tostarp minerālūdens un mājas limonādes."
+      }
+    }
+  ]
 }
 </script>
   <title>Šeherezāde — Kaukāza kafejnīca Rīgā</title>
