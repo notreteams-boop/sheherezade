@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, follow" />
+<title>Privātuma politika — Šeherezāde</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&subset=latin,latin-ext&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --coal:      #1a1209;
+    --espresso:  #2c1a0e;
+    --bark:      #4a2c1a;
+    --terracotta:#c0522a;
+    --pomegranate:#9b2a2a;
+    --ember:     #d4622c;
+    --sand:      #f5ede0;
+    --cream:     #faf5ed;
+    --gold:      #c8973a;
+    --smoke:     #8a7060;
+    --font-serif: 'Palatino Linotype', 'Book Antiqua', Palatino, 'Times New Roman', serif;
+    --font-sans:  'Nunito Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--coal);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* ─── NOISE TEXTURE (matches main site) ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.35;
+  }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--sand); }
+  ::-webkit-scrollbar-thumb { background: var(--terracotta); border-radius: 3px; }
+
+  a { color: var(--terracotta); }
+  a:hover { color: var(--ember); }
+
+  /* ─── TOP BAR ─── */
+  #topbar {
+    background: var(--coal);
+    padding: 0 2rem;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .brand-logo {
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--cream);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+  .brand-logo:hover { color: var(--cream); }
+  .brand-logo span { color: var(--gold); font-style: italic; }
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(250,245,237,0.75);
+    text-decoration: none;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--gold); }
+  .back-link svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+  /* ─── HERO ─── */
+  .doc-hero {
+    padding: 4.5rem 2rem 3rem;
+    text-align: center;
+    background: linear-gradient(180deg, var(--espresso) 0%, var(--coal) 100%);
+    position: relative;
+  }
+  .doc-eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 1rem;
+  }
+  .doc-hero h1 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    color: var(--cream);
+    margin-bottom: 0.85rem;
+  }
+  .doc-updated {
+    font-size: 0.85rem;
+    color: rgba(250,245,237,0.55);
+    font-style: italic;
+  }
+  .ornament {
+    width: 120px;
+    height: 14px;
+    margin: 1.75rem auto 0;
+    opacity: 0.6;
+  }
+
+  /* ─── LAYOUT ─── */
+  .doc-wrap {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 3.5rem 2rem 6rem;
+    display: grid;
+    grid-template-columns: 260px minmax(0, 1fr);
+    gap: 3.5rem;
+    align-items: start;
+  }
+
+  /* ─── TOC (sticky sidebar) ─── */
+  .toc-wrap { position: sticky; top: 2rem; }
+  .toc-label {
+    font-family: var(--font-sans);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 1rem;
+    display: block;
+  }
+  .toc-list { list-style: none; border-left: 2px solid rgba(74,44,26,0.12); }
+  .toc-list li { margin: 0; }
+  .toc-list a {
+    display: block;
+    padding: 0.42rem 0 0.42rem 1rem;
+    margin-left: -2px;
+    border-left: 2px solid transparent;
+    font-size: 0.83rem;
+    color: var(--smoke);
+    text-decoration: none;
+    line-height: 1.4;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .toc-list a:hover { color: var(--terracotta); }
+  .toc-list a.active {
+    color: var(--terracotta);
+    border-left-color: var(--terracotta);
+    font-weight: 600;
+  }
+
+  .toc-mobile { display: none; }
+
+  /* ─── DOC CONTENT ─── */
+  .doc-content { min-width: 0; }
+
+  .doc-intro {
+    background: var(--sand);
+    border-left: 3px solid var(--terracotta);
+    border-radius: 4px;
+    padding: 1.5rem 1.75rem;
+    margin-bottom: 3rem;
+    font-size: 0.92rem;
+    color: var(--bark);
+  }
+  .doc-intro strong { color: var(--coal); }
+
+  .doc-section {
+    margin-bottom: 2.75rem;
+    padding-bottom: 2.75rem;
+    border-bottom: 1px solid rgba(74,44,26,0.1);
+    scroll-margin-top: 1.5rem;
+  }
+  .doc-section:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+  .doc-section h2 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: 1.45rem;
+    color: var(--coal);
+    margin-bottom: 1.1rem;
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+  }
+  .doc-section h2 .num {
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--terracotta);
+    letter-spacing: 0.05em;
+  }
+
+  .doc-section p { margin-bottom: 1rem; color: var(--bark); font-size: 0.95rem; }
+  .doc-section p:last-child { margin-bottom: 0; }
+  .doc-section strong { color: var(--coal); font-weight: 700; }
+
+  .doc-section ul {
+    margin: 0 0 1rem 0;
+    padding-left: 1.4rem;
+    color: var(--bark);
+    font-size: 0.95rem;
+  }
+  .doc-section ul:last-child { margin-bottom: 0; }
+  .doc-section li { margin-bottom: 0.55rem; }
+  .doc-section li::marker { color: var(--terracotta); }
+
+  .callout {
+    background: rgba(200,151,58,0.08);
+    border: 1px solid rgba(200,151,58,0.25);
+    border-radius: 6px;
+    padding: 1.1rem 1.35rem;
+    margin: 1.25rem 0;
+    font-size: 0.9rem;
+  }
+  .callout strong { color: var(--terracotta); }
+
+  .org-block {
+    background: var(--sand);
+    border-radius: 6px;
+    padding: 1.25rem 1.5rem;
+    margin: 1rem 0;
+    font-size: 0.92rem;
+    line-height: 1.75;
+  }
+  .org-block .org-name {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    color: var(--coal);
+    display: block;
+    margin-bottom: 0.35rem;
+  }
+
+  /* ─── TABLE ─── */
+  .table-wrap { overflow-x: auto; margin: 0.5rem 0 1.25rem; border-radius: 6px; border: 1px solid rgba(74,44,26,0.12); }
+  table { width: 100%; border-collapse: collapse; font-size: 0.87rem; min-width: 560px; }
+  thead th {
+    background: var(--coal);
+    color: var(--cream);
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-align: left;
+    padding: 0.8rem 1rem;
+  }
+  tbody td {
+    padding: 0.75rem 1rem;
+    border-top: 1px solid rgba(74,44,26,0.1);
+    color: var(--bark);
+    vertical-align: top;
+  }
+  tbody tr:nth-child(even) { background: rgba(245,237,224,0.5); }
+
+  /* ─── RIGHTS GRID (section 9) ─── */
+  .rights-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.85rem;
+    margin: 0.5rem 0 1.25rem;
+  }
+  .right-card {
+    background: var(--sand);
+    border-radius: 6px;
+    padding: 1rem 1.15rem;
+    font-size: 0.87rem;
+  }
+  .right-card strong { display: block; color: var(--terracotta); margin-bottom: 0.3rem; font-size: 0.85rem; }
+  @media (max-width: 640px) { .rights-grid { grid-template-columns: 1fr; } }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--coal);
+    padding: 2.75rem 2rem;
+    text-align: center;
+  }
+  .footer-brand { font-family: var(--font-serif); font-size: 1.1rem; color: var(--cream); margin-bottom: 0.6rem; }
+  .footer-brand span { color: var(--gold); font-style: italic; }
+  .footer-copy { font-size: 0.72rem; color: rgba(250,245,237,0.35); letter-spacing: 0.05em; }
+  .footer-back {
+    display: inline-block;
+    margin-top: 1.1rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-decoration: none;
+  }
+  .footer-back:hover { color: var(--ember); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .doc-wrap { grid-template-columns: 1fr; padding: 2.5rem 1.25rem 4rem; gap: 0; }
+    .toc-wrap { display: none; }
+    .toc-mobile {
+      display: block;
+      margin-bottom: 2.25rem;
+      background: var(--sand);
+      border-radius: 6px;
+      border: 1px solid rgba(74,44,26,0.12);
+    }
+    .toc-mobile summary {
+      cursor: pointer;
+      padding: 0.9rem 1.1rem;
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .toc-mobile summary::-webkit-details-marker { display: none; }
+    .toc-mobile summary::after { content: '▾'; transition: transform 0.2s; }
+    .toc-mobile[open] summary::after { transform: rotate(180deg); }
+    .toc-mobile .toc-list { border-left: none; padding: 0 1.1rem 0.9rem; }
+    .toc-mobile .toc-list a { padding: 0.35rem 0; border-left: none; }
+    .doc-hero { padding: 3.25rem 1.25rem 2.25rem; }
+  }
+  @media (max-width: 520px) {
+    #topbar { padding: 0 1.1rem; }
+    .back-link span { display: none; }
+  }
+
+  /* ─── PRINT ─── */
+  @media print {
+    #topbar, .toc-wrap, .toc-mobile, footer, .doc-hero { display: none; }
+    .doc-wrap { grid-template-columns: 1fr; padding: 0; }
+    body { background: #fff; }
+  }
+</style>
+</head>
+<body>
+
+<div id="topbar">
+  <a class="brand-logo" href="index.html">Šeherez<span>āde</span></a>
+  <a class="back-link" href="index.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    <span>Atpakaļ uz sākumu</span>
+  </a>
+</div>
+
+<div class="doc-hero">
+  <em class="doc-eyebrow">Šeherezāde · Juridiskā informācija</em>
+  <h1>Privātuma politika</h1>
+  <p class="doc-updated">Pēdējo reizi atjaunināts: 2026. gada 11. jūlijā</p>
+  <svg class="ornament" viewBox="0 0 120 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <line x1="0" y1="7" x2="44" y2="7" stroke="#c8973a" stroke-width="1"/>
+    <circle cx="60" cy="7" r="4" stroke="#c8973a" stroke-width="1"/>
+    <circle cx="60" cy="7" r="1.4" fill="#c8973a"/>
+    <line x1="76" y1="7" x2="120" y2="7" stroke="#c8973a" stroke-width="1"/>
+  </svg>
+</div>
+
+<div class="doc-wrap">
+
+  <!-- ═══════ TOC — desktop sticky sidebar ═══════ -->
+  <aside class="toc-wrap">
+    <span class="toc-label">Saturs</span>
+    <ul class="toc-list" id="tocList">
+      <li><a href="#s1">1. Vispārīga informācija</a></li>
+      <li><a href="#s2">2. Kādus datus mēs apstrādājam</a></li>
+      <li><a href="#s3">3. Kā tiek iegūti dati</a></li>
+      <li><a href="#s4">4. Datu apstrādes mērķi</a></li>
+      <li><a href="#s5">5. Tiesiskais pamats</a></li>
+      <li><a href="#s6">6. Trešo personu pakalpojumi</a></li>
+      <li><a href="#s7">7. Nodošana ārpus ES/EEZ</a></li>
+      <li><a href="#s8">8. Datu glabāšanas termiņš</a></li>
+      <li><a href="#s9">9. Jūsu tiesības</a></li>
+      <li><a href="#s10">10. Sīkfaili (cookies)</a></li>
+      <li><a href="#s11">11. Vērtējuma funkcija</a></li>
+      <li><a href="#s12">12. Automatizēta lēmumu pieņemšana</a></li>
+      <li><a href="#s13">13. Mākslīgā intelekta izmantošana</a></li>
+      <li><a href="#s14">14. Vecuma ierobežojumi</a></li>
+      <li><a href="#s15">15. Datu drošība</a></li>
+      <li><a href="#s16">16. Izmaiņas šajā Politikā</a></li>
+      <li><a href="#s17">17. Kontaktinformācija</a></li>
+    </ul>
+  </aside>
+
+  <div class="doc-content">
+
+    <!-- ═══════ TOC — mobile collapsible ═══════ -->
+    <details class="toc-mobile">
+      <summary>Rādīt saturu</summary>
+      <ul class="toc-list">
+        <li><a href="#s1">1. Vispārīga informācija</a></li>
+        <li><a href="#s2">2. Kādus datus mēs apstrādājam</a></li>
+        <li><a href="#s3">3. Kā tiek iegūti dati</a></li>
+        <li><a href="#s4">4. Datu apstrādes mērķi</a></li>
+        <li><a href="#s5">5. Tiesiskais pamats</a></li>
+        <li><a href="#s6">6. Trešo personu pakalpojumi</a></li>
+        <li><a href="#s7">7. Nodošana ārpus ES/EEZ</a></li>
+        <li><a href="#s8">8. Datu glabāšanas termiņš</a></li>
+        <li><a href="#s9">9. Jūsu tiesības</a></li>
+        <li><a href="#s10">10. Sīkfaili (cookies)</a></li>
+        <li><a href="#s11">11. Vērtējuma funkcija</a></li>
+        <li><a href="#s12">12. Automatizēta lēmumu pieņemšana</a></li>
+        <li><a href="#s13">13. Mākslīgā intelekta izmantošana</a></li>
+        <li><a href="#s14">14. Vecuma ierobežojumi</a></li>
+        <li><a href="#s15">15. Datu drošība</a></li>
+        <li><a href="#s16">16. Izmaiņas šajā Politikā</a></li>
+        <li><a href="#s17">17. Kontaktinformācija</a></li>
+      </ul>
+    </details>
+
+    <p class="doc-intro">
+      Šī privātuma politika ("Politika") apraksta, kā SIA "NURAJ" apstrādā fizisko personu datus, kas tiek iegūti, izmantojot tīmekļa vietni <strong>šeherezāde</strong> (turpmāk — "Vietne"), kas pieejama adresē
+      <a href="https://notreteams-boop.github.io/sheherezade/" target="_blank" rel="noopener">notreteams-boop.github.io/sheherezade</a>,
+      un ar to saistītos pakalpojumus (galdiņu rezervācija, ēdienu pasūtīšana paņemšanai vai piegādei). Izmantojot Vietni un iesniedzot tajā savus datus, Jūs apliecināt, ka esat iepazinies(-usies) ar šo Politiku un piekrītat tajā aprakstītajai datu apstrādei.
+    </p>
+
+    <section class="doc-section" id="s1">
+      <h2><span class="num">01</span> Vispārīga informācija</h2>
+      <p>Jautājumos par personas datu apstrādi lūdzam sazināties, izmantojot zemāk norādīto tālruņa numuru.</p>
+      <div class="org-block">
+        <span class="org-name">Pārzinis (datu apstrādes atbildīgā persona): SIA "NURAJ"</span>
+        Reģistrācijas numurs: 40103788659<br>
+        Juridiskā adrese: Ogres iela 1A, Rīga, LV-1019, Latvija<br>
+        Tālrunis: <a href="tel:+37129446848">+371 29 446 848</a>
+      </div>
+    </section>
+
+    <section class="doc-section" id="s2">
+      <h2><span class="num">02</span> Kādus datus mēs apstrādājam</h2>
+      <p>Atkarībā no izvēlētā pakalpojuma veida (galdiņa rezervācija, pasūtījums paņemšanai vai piegāde), Vietnē izvietotās pieteikuma formas var pieprasīt šādus datus:</p>
+      <ul>
+        <li><strong>Vārds</strong> — lai Jūs varētu identificēt, sazinoties par pasūtījumu vai rezervāciju;</li>
+        <li><strong>Tālruņa numurs</strong> — lai sazinātos ar Jums pasūtījuma vai rezervācijas apstiprināšanai;</li>
+        <li><strong>Rezervācijas dati</strong> — vēlamais datums, laiks un viesu skaits (galdiņa rezervācijai);</li>
+        <li><strong>Pasūtījuma saturs</strong> — izvēlētie ēdieni un dzērieni no ēdienkartes;</li>
+        <li><strong>Piegādes adrese</strong> — iela, mājas numurs, dzīvokļa numurs un piegādes rajons (tikai piegādes pasūtījumiem);</li>
+        <li><strong>Papildu vēlmes</strong> — brīvas formas komentāri, ko Jūs pats(-i) izvēlaties norādīt (piemēram, alerģijas, īpaši pasākumi, norēķina kupīras nominālvērtība skaidras naudas atlikuma sagatavošanai);</li>
+        <li><strong>Vērtējums</strong> — piecu zvaigžņu skalas atzīme par apkalpošanas kvalitāti (neobligāti, pēc pasūtījuma nosūtīšanas).</li>
+      </ul>
+      <p>Vietne <strong>neveic</strong> maksājumu datu (bankas karšu, IBAN u.c.) apstrādi — norēķini par pasūtījumiem notiek tikai klātienē, skaidrā naudā vai ar maksājumu karti, saņemot pasūtījumu vai ierodoties kafejnīcā.</p>
+      <p>Vietne <strong>neveic</strong> lietotāju reģistrāciju, kontu izveidi vai paroļu glabāšanu.</p>
+    </section>
+
+    <section class="doc-section" id="s3">
+      <h2><span class="num">03</span> Kā tiek iegūti dati</h2>
+      <p>Dati tiek iegūti vienīgi tad, kad Jūs pats(-i) tos brīvprātīgi ievadāt Vietnē esošajās formās (galdiņa rezervācija, pasūtījums paņemšanai, pasūtījums piegādei).</p>
+      <div class="callout">
+        <strong>Svarīgi tehniskais process:</strong> pēc formas aizpildīšanas un pogas "Nosūtīt uz WhatsApp" nospiešanas, Jūsu ierīce automātiski sagatavo iepriekš aizpildītu ziņojumu, kuru <strong>Jūs pats(-i) nosūtāt no sava WhatsApp konta</strong> uz kafejnīcas WhatsApp Business numuru. Vietne pati par sevi šos datus nesaglabā, neapstrādā un neuzglabā savā serverī vai datubāzē — Vietne ir statiska tīmekļa lapa bez servera puses datu apstrādes vai datubāzes.
+      </div>
+      <p>Tas nozīmē, ka faktiskā datu nosūtīšana notiek, izmantojot WhatsApp platformu (kuru pārvalda WhatsApp Ireland Limited / Meta Platforms Ireland Limited), un uz šo nosūtīšanu attiecas arī WhatsApp lietošanas noteikumi un privātuma politika, ar kuriem iesakām iepazīties atsevišķi.</p>
+    </section>
+
+    <section class="doc-section" id="s4">
+      <h2><span class="num">04</span> Datu apstrādes mērķi</h2>
+      <p>Mēs apstrādājam Jūsu datus šādiem mērķiem:</p>
+      <ul>
+        <li>galdiņa rezervācijas noformēšanai un apstiprināšanai;</li>
+        <li>pasūtījuma pieņemšanai un izpildei (paņemšana vai piegāde);</li>
+        <li>saziņai ar Jums par pasūtījuma vai rezervācijas statusu;</li>
+        <li>piegādes nodrošināšanai uz Jūsu norādīto adresi;</li>
+        <li>pakalpojumu kvalitātes uzlabošanai, ņemot vērā Jūsu atsauksmes.</li>
+      </ul>
+    </section>
+
+    <section class="doc-section" id="s5">
+      <h2><span class="num">05</span> Tiesiskais pamats datu apstrādei</h2>
+      <p>Datu apstrāde balstās uz šādiem tiesiskajiem pamatiem atbilstoši Vispārīgajai datu aizsardzības regulai (ES) 2016/679 ("VDAR"):</p>
+      <ul>
+        <li><strong>Līguma izpilde vai pasākumi pirms līguma noslēgšanas</strong> (VDAR 6. panta 1. punkta b) apakšpunkts) — lai pieņemtu un izpildītu Jūsu pasūtījumu vai rezervāciju;</li>
+        <li><strong>Piekrišana</strong> (VDAR 6. panta 1. punkta a) apakšpunkts) — attiecībā uz datu nosūtīšanu, izmantojot WhatsApp platformu, un neobligāto vērtējuma sniegšanu. Piekrišanu Jūs apliecināt, brīvprātīgi aizpildot formu un nospiežot pogu "Nosūtīt uz WhatsApp".</li>
+      </ul>
+    </section>
+
+    <section class="doc-section" id="s6">
+      <h2><span class="num">06</span> Trešo personu pakalpojumi</h2>
+      <p>Vietnes darbības nodrošināšanai un pasūtījumu apstrādei tiek izmantoti šādi trešo personu pakalpojumi:</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Pakalpojums</th><th>Sniedzējs</th><th>Nolūks</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>GitHub Pages</td><td>GitHub, Inc. (ASV)</td><td>Vietnes tehniskais mitinājums (hostings)</td></tr>
+            <tr><td>WhatsApp Business</td><td>WhatsApp Ireland Limited / Meta Platforms, Inc.</td><td>Pasūtījumu un rezervāciju saņemšana</td></tr>
+            <tr><td>Google Search Console</td><td>Google Ireland Limited</td><td>Vietnes redzamības nodrošināšana Google meklētājā (neveic apmeklētāju izsekošanu)</td></tr>
+            <tr><td>Google Maps</td><td>Google Ireland Limited</td><td>Kafejnīcas atrašanās vietas attēlošana kartē</td></tr>
+            <tr><td>Google atsauksmes (Google Reviews)</td><td>Google Ireland Limited</td><td>Novirzīšana uz Google atsauksmju lapu pēc pozitīva vērtējuma</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Šie pakalpojumu sniedzēji darbojas kā neatkarīgi pārziņi vai apstrādātāji atbilstoši saviem privātuma nosacījumiem, ar kuriem iesakām iepazīties to attiecīgajās tīmekļa vietnēs.</p>
+      <p>Vietne <strong>neizmanto</strong> reklāmas izsekošanas rīkus (piemēram, Meta Pixel, Google Ads), analītikas sīkfailus (piemēram, Google Analytics) vai citus lietotāju uzvedības izsekošanas rīkus, kas nav minēti šajā sarakstā.</p>
+    </section>
+
+    <section class="doc-section" id="s7">
+      <h2><span class="num">07</span> Datu nodošana ārpus Eiropas Savienības / EEZ</h2>
+      <p>Daļa no iepriekš minētajiem pakalpojumu sniedzējiem (GitHub, Inc.; Meta Platforms, Inc.) ir reģistrēti Amerikas Savienotajās Valstīs, un dati var tikt nodoti apstrādei ārpus Eiropas Savienības un Eiropas Ekonomiskās zonas.</p>
+      <p>Šāda nodošana tiek veikta, pamatojoties uz attiecīgo pakalpojumu sniedzēju nodrošinātajiem aizsardzības mehānismiem (piemēram, Eiropas Komisijas apstiprinātajām līguma standartklauzulām vai dalību ES–ASV datu privātuma regulējumā (EU-U.S. Data Privacy Framework), ja piemērojams). Papildu informāciju par konkrētiem aizsardzības pasākumiem var iegūt attiecīgā pakalpojuma sniedzēja privātuma politikā.</p>
+    </section>
+
+    <section class="doc-section" id="s8">
+      <h2><span class="num">08</span> Datu glabāšanas termiņš</h2>
+      <ul>
+        <li><strong>Vietnes forma pati par sevi datus neuzglabā</strong> — dati caur formu nekavējoties tiek pārveidoti par WhatsApp ziņojumu, ko nosūta pats lietotājs.</li>
+        <li><strong>WhatsApp sarakste</strong>: pēc pasūtījuma vai rezervācijas saņemšanas Pārzinis saglabā saraksti savā WhatsApp Business kontā tik ilgi, cik nepieciešams pasūtījuma izpildei un iespējamu strīdu risināšanai, taču ne ilgāk kā <strong>12 mēnešus</strong> no pēdējās sarakstes dienas, ja vien ilgāka glabāšana nav nepieciešama tiesību aktos noteikto prasību izpildei (piemēram, grāmatvedības vai patērētāju tiesību aizsardzības jomā).</li>
+        <li>Pēc pieprasījuma Pārzinis dzēsīs attiecīgo saraksti no savas puses (sava WhatsApp konta) saprātīgā termiņā.</li>
+      </ul>
+      <div class="callout">
+        <strong>Svarīgs tehnisks skaidrojums:</strong> WhatsApp ziņojumu, kuru lietotājs nosūta no sava personīgā WhatsApp konta, lietotājs var dzēst tikai no savas puses jebkurā brīdī, savukārt dzēšana abām pusēm ("Delete for everyone") WhatsApp platformā tehniski iespējama tikai ierobežotā laika periodā pēc nosūtīšanas. Tā kā ziņojumu izveido un nosūta pats lietotājs, izmantojot savu WhatsApp kontu, Pārzinim nav tehniskas iespējas dzēst šo ziņojumu no lietotāja ierīces vai konta. Pārzinis apņemas dzēst datus tikai savas kontroles ietvaros, t.i., no sava WhatsApp konta un ierīces.
+      </div>
+    </section>
+
+    <section class="doc-section" id="s9">
+      <h2><span class="num">09</span> Jūsu tiesības</h2>
+      <p>Saskaņā ar VDAR Jums ir šādas tiesības attiecībā uz saviem personas datiem:</p>
+      <div class="rights-grid">
+        <div class="right-card"><strong>Piekļuves tiesības</strong>Pieprasīt informāciju par to, vai un kādi Jūsu dati tiek apstrādāti.</div>
+        <div class="right-card"><strong>Labošanas tiesības</strong>Pieprasīt neprecīzu datu labošanu.</div>
+        <div class="right-card"><strong>Dzēšanas tiesības</strong>("tiesības tikt aizmirstam") — ievērojot 8. sadaļā minētos tehniskos ierobežojumus.</div>
+        <div class="right-card"><strong>Apstrādes ierobežošanas tiesības</strong>Noteiktos gadījumos pieprasīt apstrādes ierobežošanu.</div>
+        <div class="right-card"><strong>Iebilduma tiesības</strong>Iebilst pret savu datu apstrādi, ja tā balstās uz leģitīmām interesēm.</div>
+        <div class="right-card"><strong>Piekrišanas atsaukšana</strong>Jebkurā brīdī atsaukt savu piekrišanu, neietekmējot pirms atsaukšanas veiktās apstrādes likumību.</div>
+      </div>
+      <p><strong>Tiesības iesniegt sūdzību</strong> uzraudzības iestādē — Latvijā tā ir <strong>Datu valsts inspekcija</strong> (<a href="https://www.dvi.gov.lv" target="_blank" rel="noopener">www.dvi.gov.lv</a>), ja uzskatāt, ka Jūsu tiesības ir pārkāptas.</p>
+      <p>Lai izmantotu šīs tiesības, lūdzam sazināties, izmantojot 1. sadaļā norādīto tālruņa numuru.</p>
+    </section>
+
+    <section class="doc-section" id="s10">
+      <h2><span class="num">10</span> Sīkfaili (cookies)</h2>
+      <p>Vietne pati par sevi <strong>neizmanto pirmās puses sīkfailus</strong> lietotāju uzvedības izsekošanai vai reklāmas mērķiem.</p>
+      <p>Vietnē ir integrēti šādi trešo pušu elementi, kas var izmantot savus sīkfailus vai līdzīgas tehnoloģijas saskaņā ar attiecīgā pakalpojuma sniedzēja noteikumiem:</p>
+      <ul>
+        <li><strong>Google Maps</strong> — kafejnīcas atrašanās vietas karte;</li>
+        <li><strong>Google meklētājs</strong> — netiešā veidā, izmantojot Google Search Console vietnes indeksēšanai.</li>
+      </ul>
+      <p>Šie elementi var iestatīt sīkfailus atbilstoši Google privātuma politikai, ar kuru var iepazīties Google oficiālajā tīmekļa vietnē.</p>
+    </section>
+
+    <section class="doc-section" id="s11">
+      <h2><span class="num">11</span> Vērtējuma funkcija</h2>
+      <p>Pēc pasūtījuma vai rezervācijas nosūtīšanas Vietne var lūgt novērtēt apkalpošanas kvalitāti piecu zvaigžņu skalā. Ja lietotājs izvēlas augstāko vērtējumu (5 zvaigznes), viņš tiek automātiski novirzīts uz Google atsauksmju lapu, kur pēc paša izvēles var atstāt publisku atsauksmi. Ja lietotājs izvēlas zemāku vērtējumu, šī informācija netiek nosūtīta, uzglabāta vai apstrādāta — tā vienkārši netiek saglabāta nekur.</p>
+    </section>
+
+    <section class="doc-section" id="s12">
+      <h2><span class="num">12</span> Automatizēta lēmumu pieņemšana</h2>
+      <p>Vietnē <strong>netiek izmantota</strong> automatizēta lēmumu pieņemšana vai profilēšana VDAR 22. panta izpratnē. Visus pasūtījumus un rezervācijas apstrādā un apstiprina Pārziņa darbinieki manuāli.</p>
+    </section>
+
+    <section class="doc-section" id="s13">
+      <h2><span class="num">13</span> Mākslīgā intelekta izmantošana</h2>
+      <p>Vietnes darbībā un pasūtījumu apstrādē <strong>netiek izmantoti</strong> mākslīgā intelekta vai lielo valodu modeļu rīki (piemēram, ChatGPT, Claude u.c.), kas apstrādātu Jūsu personas datus.</p>
+    </section>
+
+    <section class="doc-section" id="s14">
+      <h2><span class="num">14</span> Vecuma ierobežojumi</h2>
+      <p>Kafejnīcas ēdienkartē ir pieejami alkoholiskie dzērieni. Vietne nenodrošina automatizētu vecuma pārbaudi pasūtīšanas brīdī — alkoholisko dzērienu iegāde un vecuma atbilstības pārbaude notiek <strong>klātienē</strong>, saņemot pasūtījumu vai apmeklējot kafejnīcu, saskaņā ar Latvijas Republikas normatīvajiem aktiem par alkohola tirdzniecību. Vietne nav paredzēta personām, kas jaunākas par 18 gadiem, patstāvīgai alkoholisko dzērienu pasūtīšanai.</p>
+    </section>
+
+    <section class="doc-section" id="s15">
+      <h2><span class="num">15</span> Datu drošība</h2>
+      <p>Pārzinis īsteno saprātīgus organizatoriskos un tehniskos pasākumus, lai aizsargātu Jūsu datus no nesankcionētas piekļuves, zuduma vai ļaunprātīgas izmantošanas, ciktāl tas ir Pārziņa kontrolē. Tā kā Vietne ir statiska lapa bez servera puses datubāzes, dati netiek uzglabāti Vietnes infrastruktūrā, kas samazina nesankcionētas piekļuves risku no Vietnes puses.</p>
+    </section>
+
+    <section class="doc-section" id="s16">
+      <h2><span class="num">16</span> Izmaiņas šajā Politikā</h2>
+      <p>Pārzinis patur tiesības jebkurā laikā veikt izmaiņas šajā Politikā, publicējot atjaunināto versiju Vietnē. Politikas jaunākā redakcija vienmēr ir pieejama šajā lapā, norādot pēdējo atjaunināšanas datumu.</p>
+    </section>
+
+    <section class="doc-section" id="s17">
+      <h2><span class="num">17</span> Kontaktinformācija</h2>
+      <p>Ja Jums ir jautājumi par šo Politiku vai savu personas datu apstrādi, lūdzam sazināties:</p>
+      <div class="org-block">
+        <span class="org-name">SIA "NURAJ"</span>
+        Ogres iela 1A, Rīga, LV-1019, Latvija<br>
+        Tālrunis: <a href="tel:+37129446848">+371 29 446 848</a>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<footer>
+  <div class="footer-brand">Šeherez<span>āde</span></div>
+  <div class="footer-copy">© 2026 Šeherezāde. Visas tiesības aizsargātas.</div>
+  <a class="footer-back" href="index.html">← Atpakaļ uz sākumu</a>
+</footer>
+
+<script>
+  // ─── SCROLLSPY: highlight active TOC item ───────────────────────
+  const sections = Array.from(document.querySelectorAll('.doc-section'));
+  const tocLinks = Array.from(document.querySelectorAll('.toc-wrap .toc-list a'));
+
+  function updateActiveTOC() {
+    let currentId = sections[0] ? sections[0].id : null;
+    const scrollPos = window.scrollY + 120;
+    for (const sec of sections) {
+      if (sec.offsetTop <= scrollPos) currentId = sec.id;
+    }
+    tocLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + currentId);
+    });
+  }
+  window.addEventListener('scroll', updateActiveTOC, { passive: true });
+  updateActiveTOC();
+
+  // Close the mobile TOC after tapping a link
+  document.querySelectorAll('.toc-mobile .toc-list a').forEach(a => {
+    a.addEventListener('click', () => {
+      const details = document.querySelector('.toc-mobile');
+      if (details) details.removeAttribute('open');
+    });
+  });
+</script>
+
+</body>
+</html>
